@@ -3,6 +3,8 @@ package fr.ensicaen.projetintensif;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -81,18 +83,15 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        if (id == R.id.evenement) {/*
+            Fragment frag = new BlankFragment2();
+            FragmentManager ft = getSupportFragmentManager();
+            ft.beginTransaction().replace(R.id.hello,frag).commit();*/
+        } else if (id == R.id.parametres) {
+            /*Fragment frag = new BlankFragment();
+            FragmentManager ft = getSupportFragmentManager();
+            ft.beginTransaction().replace(R.id.hello,frag).commit();
+*/
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
