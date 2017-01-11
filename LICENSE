@@ -1,201 +1,71 @@
-                                 Apache License
-                           Version 2.0, January 2004
-                        http://www.apache.org/licenses/
+CREATIVE COMMONS CORPORATION N'EST PAS UN CABINET D'AVOCATS ET NE FOURNIT PAS DE CONSEIL JURIDIQUE. LA DISTRIBUTION DE CETTE LICENCE NE CREE AUCUNE RELATION JURIDIQUE ENTRE LES PARTIES ET CREATIVE COMMONS. CREATIVE COMMONS MET A DISPOSITION CES INFORMATIONS EN L’ETAT. CREATIVE COMMONS NE DONNE AUCUNE GARANTIE CONCERNANT LES INFORMATIONS FOURNIES ET DECLINE TOUTE RESPONSABILITE POUR LES PREJUDICES QUI RESULTERAIENT DE LEUR UTILISATION. 
 
-   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+Licence
 
-   1. Definitions.
+L'ŒUVRE (TELLE QUE DEFINIE CI-DESSOUS) EST MISE A DISPOSITION SELON LES TERMES DE CETTE LICENCE PUBLIQUE CREATIVE COMMONS (CI-APRES DENOMMEE « LPCC » OU « LICENCE »). L'ŒUVRE EST PROTEGEE PAR LE DROIT DE LA PROPRIETE LITTERAIRE ET ARTISTIQUE OU TOUTE AUTRE LOI APPLICABLE. TOUTE UTILISATION DE L'ŒUVRE AUTRE QUE CELLE AUTORISEE PAR CETTE LICENCE EST RÉSERVÉE.
 
-      "License" shall mean the terms and conditions for use, reproduction,
-      and distribution as defined by Sections 1 through 9 of this document.
+L’EXERCICE DE TOUT DROIT SUR L’ŒUVRE MISE A DISPOSITION EMPORTE ACCEPTATION DES TERMES DE LA LICENCE. EN RAISON DU CARACTERE CONTRACTUEL DE LA LICENCE, L’OFFRANT ACCORDE A L’ACCEPTANT LES DROITS CONTENUS DANS CETTE LICENCE EN CONTREPARTIE DE SON ACCEPTATION.
 
-      "Licensor" shall mean the copyright owner or entity authorized by
-      the copyright owner that is granting the License.
+1. Définitions
 
-      "Legal Entity" shall mean the union of the acting entity and all
-      other entities that control, are controlled by, or are under common
-      control with that entity. For the purposes of this definition,
-      "control" means (i) the power, direct or indirect, to cause the
-      direction or management of such entity, whether by contract or
-      otherwise, or (ii) ownership of fifty percent (50%) or more of the
-      outstanding shares, or (iii) beneficial ownership of such entity.
+    Adaptation : œuvre créée soit à partir de l’Œuvre seule, soit à partir de l’Œuvre et d’autres œuvres préexistantes. Constituent notamment des Adaptations, les traductions, adaptations, œuvres composites, arrangements ou modifications d’une œuvre littéraire et artistique, d’un phonogramme, d’un vidéogramme ou d’une interprétation d’une œuvre, y compris les adaptations cinématographiques ou toute autre forme dans laquelle l’Œuvre est susceptible d’être refondue, transformée ou adaptée, notamment toute forme dérivée de l’original de manière identifiable. Il est toutefois entendu qu’une Œuvre qui constitue une Collection ne sera pas considérée comme une Adaptation aux fins de la présente Licence. Au cas où l’Œuvre serait une création musicale, une interprétation ou un phonogramme, la synchronisation de l’Œuvre avec une image animée sera considérée comme une Adaptation aux fins de la présente Licence.
+    Collection : recueil d’œuvres qui, en raison de la sélection et de l’arrangement de son contenu, constitue une création intellectuelle dans laquelle chaque Œuvre se trouve incluse dans son ensemble, sous une forme non modifiée, avec une ou plusieurs autres contributions, chacune d’elles constituant des œuvres en elles-mêmes indépendantes et distinctes qui sont rassemblées pour former cet ensemble. Constituent notamment des Collections, les encyclopédies, anthologies, interprétations, phonogrammes, vidéogrammes ou émissions, ou toute œuvre autre que celles désignées à l’article 1(f). Aux fins de la présente Licence, une création qui constitue une Collection ne sera pas considérée comme une Adaptation (telle que définie ci-dessus).
+    Distribution : mise à disposition du public de la version originale ou des copies de l'Œuvre ou d'une Adaptation, par la vente ou tout autre transfert de propriété ou par tout mode de communication au public dans la mesure où ces activités sont sources de droits exclusifs (location, prêt, etc).
+    Offrant : la ou les personne(s) physique(s) ou morale(s) ou la ou les entité(s) qui mettent l’Œuvre à la disposition du public selon les termes de la présente Licence.
+    Titulaire de Droits Originaire : dans l’hypothèse d’une œuvre littéraire ou artistique, l’Auteur, entendu comme la ou les personnes physiques ou morales ou les entités qui ont créé l'Œuvre; et en outre, le cas échéant, (i) dans l’hypothèse d’une interprétation, les acteurs, chanteurs, musiciens, danseurs, ou toute autre personne qui joue, chante, déclame ou interprète l’œuvre littéraire, artistique ou folklorique; (ii) dans l’hypothèse d’un phonogramme ou d’un vidéogramme, le producteur, entendu comme la personne physique ou morale qui procède à la première fixation de l’interprétation sur un support; (iii) dans l’hypothèse d’une émission, l’entreprise de communication audiovisuelle qui procède à la diffusion de l’émission; (iv) dans l’hypothèse d’une base de données, le producteur.
+    Œuvre : création protégeable par le droit de la propriété littéraire et artistique (droits d'auteur, droits voisins et droits sui generis des producteurs de bases de données) mise à disposition selon les termes de la Licence. Peuvent notamment constituer une Œuvre toute création dans le domaine littéraire, scientifique et artistique, quel qu'en soit le mode ou la forme d'expression, y compris sous forme numérique, telle qu’un livre, un pamphlet et autres écrits ; une conférence, une allocution, une plaidoirie, un cours ou un sermon ou d'autres œuvres de même nature ; une œuvre dramatique ou une comédie musicale ; une œuvre chorégraphique ou un pantomime ; une composition musicale avec ou sans paroles ; une œuvre cinématographique à laquelle sont assimilées des œuvres exprimées par un procédé analogue à la cinématographie ; un dessin, une peinture, une création architecturale, une sculpture, une gravure ou une lithographie ; une création photographique à laquelle sont assimilées des œuvres exprimées par un procédé analogue à la photographie ; une œuvre des arts appliqués ; une œuvre graphique et typographique ; une illustration, une carte, un plan, un croquis ou une œuvre tridimensionnelle relative à la géographie, la topographie, l'architecture ou aux sciences ; une interprétation, une émission ; un phonogramme ou un vidéogramme ; une anthologie ou un recueil d’œuvres ou de données diverses ou une base de données dans la mesure où elle est protégée par le droit d’auteur ou le droit des producteurs de bases de données à la condition que celles-ci soient protégées par le droit applicable qui ne couvre pas seulement les bases de données protégées par le droit d'auteur (pour éviter toute ambiguïté, les sections 3(a), 3(b) et 3(c) ne s'appliqueront pas quand seul le droit des producteurs de bases de données s'applique); une interprétation réalisée par un artiste de cirque ou de variété ; les créations des industries saisonnières de l'habillement et de la parure.
+    Acceptant : la ou les personne(s) physique(s) ou morale(s) ou entité(s) qui exercent sur l’Œuvre les droits accordés par cette Licence et qui n’ont pas précédemment violé les conditions de cette Licence ou qui ont reçu l’autorisation expresse de la part de l’Offrant d’exercer les droits conférés par cette licence malgré une violation précédente.
+    Représentation : représentation de l’Œuvre et communications au public de ces représentations publiques par un procédé quelconque, quelque soit le type de transmission, notamment numérique et incluant les modes d’exploitation prévus par le droit applicable. Constitue également notamment une communication au public, la mise à disposition d’Œuvres protégées de manière à ce que le public puisse y avoir accès de l’endroit et au moment qu’il choisit individuellement, les interprétations et communications au public des interprétations de l'Œuvre y compris les interprétations publiques au format numérique ainsi qu’une diffusion ou une rediffusion de l’Œuvre par tout moyen, notamment par des signes, des sons ou des images.
+    Reproduction : toute copie de l'Œuvre de quelque manière et sous quelque forme que ce soit, notamment numérique et incluant les modes d'exploitation prévus par le droit applicable. Constitue aussi notamment une Reproduction, un enregistrement sonore ou visuel, une fixation ou une reproduction de fixations de l'Œuvre, y compris le stockage d'une interprétation, d’un phonogramme ou d’un vidéogramme au format numérique ou sur tout autre support électronique.
 
-      "You" (or "Your") shall mean an individual or Legal Entity
-      exercising permissions granted by this License.
+2. Exceptions et limitations aux droits exclusifs. Les exceptions et limitations aux droits exclusifs prévues par la loi applicable ne sont pas affectées par la présente Licence.
 
-      "Source" form shall mean the preferred form for making modifications,
-      including but not limited to software source code, documentation
-      source, and configuration files.
+3. Étendue de l’autorisation. Sous réserve des conditions de la présente Licence, l’Offrant autorise l’Acceptant à exercer à titre gratuit, non-exclusif, pour la durée de protection des droits applicables et pour le monde entier, les droits de :
 
-      "Object" form shall mean any form resulting from mechanical
-      transformation or translation of a Source form, including but
-      not limited to compiled object code, generated documentation,
-      and conversions to other media types.
+    Reproduire, Distribuer et Représenter l'Œuvre, incorporer l'Œuvre dans une ou plusieurs Collections et reproduire l'Œuvre même incorporée dans lesdites Collections ;
+    Créer, Reproduire, Distribuer et Représenter des Adaptations, à la condition que ces Adaptations, notamment toute traduction sur tout support, soient accompagnées des mentions appropriées par étiquetage, démarcation ou identification de manière à faire apparaître clairement que des modifications ont été apportées à l’Œuvre. Par exemple, une traduction pourrait porter la mention « L’œuvre originaire a été traduite du français à l’anglais » ou en cas de modification « L’œuvre originaire a été modifiée » ;
+    Lorsque l'Œuvre est une base de données soumise au droit des producteurs de bases de données, extraire et réutiliser des parties substantielles.
 
-      "Work" shall mean the work of authorship, whether in Source or
-      Object form, made available under the License, as indicated by a
-      copyright notice that is included in or attached to the work
-      (an example is provided in the Appendix below).
+    Pour éviter toute ambiguïté :
+        Régime légal de gestion collective obligatoire.
+        Dans les cas où des utilisations de l'Œuvre seraient soumises à un régime légal de gestion collective obligatoire (auquel le droit ne permet pas de renoncer), l'Offrant se réserve le droit exclusif de collecter ces redevances par l'intermédiaire de la société de perception et de répartition des droits compétente. Sont notamment concernés la radiodiffusion et la communication dans un lieu public de phonogrammes publiés à des fins de commerce, certains cas de retransmission par câble et satellite, la copie privée d'Œuvres fixées sur phonogrammes ou vidéogrammes, la reproduction par reprographie, le prêt en bibliothèque ;
+        Régime de gestion collective obligatoire assorti de possibilité de renonciation.
+        Dans les juridictions où il est possible de renoncer au droit de percevoir des redevances au titre d'un quelconque régime de licence légale ou de gestion collective obligatoire, l’Offrant renonce au droit exclusif de percevoir lesdites redevances découlant de l’exercice par l’Acceptant des droits consentis en vertu de la présente Licence ;
+        Régime de gestion collective facultative.
+        L’Offrant renonce au droit de percevoir des redevances (que ce soit à titre individuel ou, au cas où l’Offrant serait membre d’un organisme de gestion collective facultative, par le biais de cet organisme) découlant de l’exercice par l’Acceptant des droits accordés par la présente Licence.
 
-      "Derivative Works" shall mean any work, whether in Source or Object
-      form, that is based on (or derived from) the Work and for which the
-      editorial revisions, annotations, elaborations, or other modifications
-      represent, as a whole, an original work of authorship. For the purposes
-      of this License, Derivative Works shall not include works that remain
-      separable from, or merely link (or bind by name) to the interfaces of,
-      the Work and Derivative Works thereof.
+Les droits mentionnés ci-dessus peuvent être exercés sur tous supports, médias, procédés, techniques et dans tous formats, incluant, dans la mesure du possible, les futurs médias et formats. Les droits mentionnés ci-dessus incluent le droit d'effectuer les modifications techniquement nécessaires à leur exercice sur d’autres supports, médias, procédés, techniques et formats. Les droits qui ne sont pas expressément accordés par l’Offrant à l’Acceptant par la présente Licence sont réservés. Dans le cas où l'Offrant est titulaire de droits sui generis sur les bases de données conformément à la loi nationale transposant la Directive Européenne sur les bases de données, l'Offrant renonce à ce droit.
 
-      "Contribution" shall mean any work of authorship, including
-      the original version of the Work and any modifications or additions
-      to that Work or Derivative Works thereof, that is intentionally
-      submitted to Licensor for inclusion in the Work by the copyright owner
-      or by an individual or Legal Entity authorized to submit on behalf of
-      the copyright owner. For the purposes of this definition, "submitted"
-      means any form of electronic, verbal, or written communication sent
-      to the Licensor or its representatives, including but not limited to
-      communication on electronic mailing lists, source code control systems,
-      and issue tracking systems that are managed by, or on behalf of, the
-      Licensor for the purpose of discussing and improving the Work, but
-      excluding communication that is conspicuously marked or otherwise
-      designated in writing by the copyright owner as "Not a Contribution."
+4. Restrictions. L'autorisation accordée par l'Article 3 est expressément soumise et limitée par les restrictions suivantes :
 
-      "Contributor" shall mean Licensor and any individual or Legal Entity
-      on behalf of whom a Contribution has been received by Licensor and
-      subsequently incorporated within the Work.
+    L'Acceptant peut Distribuer ou Représenter l'Œuvre uniquement selon les termes de cette licence. Il doit inclure une copie de la Licence, ou son Identifiant Uniforme de Ressource (URI), à toute copie de l'Œuvre qu'il Distribue ou Représente. L'Acceptant ne peut pas offrir ou imposer de conditions d'utilisation sur l'Œuvre qui restreignent les termes de la Licence ou la capacité du bénéficiaire ultérieur d'exercer les droits qui lui sont accordés par cette Licence. L'Acceptant ne peut consentir de sous-licence sur l'Œuvre. Il doit conserver intacts tous les avertissements qui se réfèrent à cette Licence et l’avertissement sur les garanties avec chaque copie de l’Œuvre qu’il distribue ou représente. Lorsque l’Acceptant distribue ou représente l’Œuvre, il ne doit pas imposer de mesure technique de protection susceptible de restreindre la capacité du bénéficiaire ultérieur à exercer les droits conférés par la présente Licence. L’article 4(a) s’applique à l’Œuvre telle qu’incorporée dans une Collection, mais n’a pas pour effet d’imposer que la Collection soit soumise aux conditions de la Licence. Si l'Acceptant crée une Collection, il doit, à la demande de tout Offrant et dans la mesure du possible, supprimer de la Collection toute référence audit Offrant, selon les modalités de l’Article 4(b), et ce conformément à la demande. Si l'Acceptant crée une Adaptation, il doit, à la demande de tout Offrant et dans la mesure du possible, supprimer de l'Adaptation toute référence audit Offrant, selon les modalités de l’Article 4(b), et ce conformément à la demande.
+    Sauf introduction d’une demande prévue à l’Article 4(a), l'Acceptant doit, lorsqu'il distribue ou représente l'Œuvre, ou toute Adaptation ou Collection, garder intacts tous les avertissements sur les droits d’auteur concernant l’Œuvre et fournir, de manière appropriée au support ou au média qu'il utilise : (i) le nom du Titulaire de Droits Originaire (ou le pseudonyme, le cas échéant) s'il est mentionné, et/ou si le Titulaire de Droits Originaire et/ou l’Offrant désigne une ou des parties (par exemple un organisme de financement, un éditeur ou un journal) à attribuer (« les Parties à Attribuer ») dans l’avertissement sur les droits d’auteur de l’Offrant, les conditions d’utilisation ou, par un autre moyen approprié, le nom de la Partie ou des Parties à Attribuer ; (ii) le titre de l’Œuvre, s’il est mentionné ; (iii) dans la mesure du possible, l’URI que l'Offrant spécifie comme étant associée à l’Œuvre, sauf si ledit URI ne fait pas référence à l’avertissement sur les droits ou aux informations sur la licence relative à l’Œuvre ; et, (iv) conformément à l’Article 3(b), dans le cas d’une Adaptation, une mention identifiant l’utilisation de l'Œuvre dans l’Adaptation (par exemple « traduction française de l’Œuvre par le Titulaire de Droits Originaire » ou « scénario fondé sur l’Œuvre du Titulaire de Droits Originaire »). Les crédits requis par cet article 4(b) pourront être mis en œuvre par tout moyen approprié, sous réserve, toutefois, qu’en cas d’Adaptation ou de Collection, ces crédits figurent d’une manière au moins aussi visible que les crédits relatifs aux autres auteurs y ayant contribué, si de tels crédits apparaissent. A toutes fins utiles, l'Acceptant ne pourra utiliser les crédits requis par cet Article qu'à des fins d’attribution, de la manière susmentionnée et en exerçant les droits accordés par la Licence. L'Acceptant ne peut, implicitement ou explicitement, affirmer ou laisser supposer une quelconque relation, parrainage ou aval par le Titulaire de Droits Originaire, l'Offrant, la ou les Parties à Attribuer selon le cas, et l’Acceptant ou son utilisation de l’Œuvre, sans avoir l’autorisation distincte, expresse, écrite et préalable du Titulaire de Droits Originaire, de l'Offrant et/ou des Parties à Attribuer.
+    Pour éviter toute ambiguïté, les restrictions accordées par l’article 3 et l'article 4(a) ne sont pas applicables à la partie de l’œuvre qui est soumise uniquement aux droits des producteurs de bases de données.
+    A moins d’une limitation aux droits exclusifs prévue par la loi applicable, si l’Acceptant Reproduit, Distribue ou Représente l’Œuvre en elle-même, ou au sein d’une Adaptation ou d’une Collection, il doit respecter les droits moraux du Titulaire de Droits Originaire dans la mesure où ce Titulaire en bénéficie (comme les auteurs et les artistes-interprètes) et ne peut y renoncer.
 
-   2. Grant of Copyright License. Subject to the terms and conditions of
-      this License, each Contributor hereby grants to You a perpetual,
-      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
-      copyright license to reproduce, prepare Derivative Works of,
-      publicly display, publicly perform, sublicense, and distribute the
-      Work and such Derivative Works in Source or Object form.
+5. Représentation, Garanties et Avertissement
 
-   3. Grant of Patent License. Subject to the terms and conditions of
-      this License, each Contributor hereby grants to You a perpetual,
-      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
-      (except as stated in this section) patent license to make, have made,
-      use, offer to sell, sell, import, and otherwise transfer the Work,
-      where such license applies only to those patent claims licensable
-      by such Contributor that are necessarily infringed by their
-      Contribution(s) alone or by combination of their Contribution(s)
-      with the Work to which such Contribution(s) was submitted. If You
-      institute patent litigation against any entity (including a
-      cross-claim or counterclaim in a lawsuit) alleging that the Work
-      or a Contribution incorporated within the Work constitutes direct
-      or contributory patent infringement, then any patent licenses
-      granted to You under this License for that Work shall terminate
-      as of the date such litigation is filed.
+SAUF ACCORD CONTRAIRE CONVENU PAR ECRIT ENTRE LES PARTIES ET DANS LA LIMITE DU DROIT APPLICABLE, L’OFFRANT MET L’ŒUVRE A DISPOSITION DE L’ACCEPTANT EN L’ETAT, SANS DECLARATION OU GARANTIE D’AUCUNE SORTE, EXPRESSE, IMPLICITE, LÉGALE OU AUTRE. SONT NOTAMMENT EXCLUES LES GARANTIES CONCERNANT LA COMMERCIABILITE, LA CONFORMITE, LES VICES CACHES ET LES VICES APPARENTS.
 
-   4. Redistribution. You may reproduce and distribute copies of the
-      Work or Derivative Works thereof in any medium, with or without
-      modifications, and in Source or Object form, provided that You
-      meet the following conditions:
+6. Limitation de responsabilité. A l'exception des garanties d'ordre public imposées par la loi applicable, l'Offrant ne sera en aucun cas tenu responsable vis-à-vis de l'Acceptant, sur la base d'aucune théorie juridique ni en raison d'aucun préjudice direct, indirect, matériel ou moral, résultant de l'exécution du présent Contrat ou de l'utilisation de l'Œuvre, y compris dans l'hypothèse où l'Offrant avait connaissance de la possible existence d'un tel préjudice.
 
-      (a) You must give any other recipients of the Work or
-          Derivative Works a copy of this License; and
+7. Résiliation
 
-      (b) You must cause any modified files to carry prominent notices
-          stating that You changed the files; and
+    Toute violation par l'Acceptant des clauses de cette Licence entraînera sa résiliation automatique et la fin des droits qui en découlent. Les Licences accordées aux personnes physiques ou morales qui ont reçu de la part de l'Acceptant des Adaptations ou des Collections dans le cadre de la présente Licence ne seront pas résiliées, à condition que lesdites personnes physiques ou morales respectent pleinement leurs obligations. Les articles 1, 2, 5, 6, 7 et 8 de la présente Licence continuent à s'appliquer après la résiliation de celle-ci.
+    Sous réserve des conditions mentionnées ci-dessus, la présente Licence est accordée pour toute la durée du droit d'auteur ou tout autre droit applicable à l'Œuvre. Néanmoins, l'Offrant se réserve à tout moment le droit d'exploiter l'Œuvre sous une autre Licence ou d'en cesser la Distribution à tout moment. Cependant, cette décision ne devra pas conduire à retirer cette Licence (ou toute autre Licence qui a été accordée, ou doit être accordée en application de la présente Licence) qui continuera à s'appliquer dans tous ses effets à moins qu'elle ne soit résiliée dans les conditions décrites ci-dessus.
 
-      (c) You must retain, in the Source form of any Derivative Works
-          that You distribute, all copyright, patent, trademark, and
-          attribution notices from the Source form of the Work,
-          excluding those notices that do not pertain to any part of
-          the Derivative Works; and
+8. Divers
 
-      (d) If the Work includes a "NOTICE" text file as part of its
-          distribution, then any Derivative Works that You distribute must
-          include a readable copy of the attribution notices contained
-          within such NOTICE file, excluding those notices that do not
-          pertain to any part of the Derivative Works, in at least one
-          of the following places: within a NOTICE text file distributed
-          as part of the Derivative Works; within the Source form or
-          documentation, if provided along with the Derivative Works; or,
-          within a display generated by the Derivative Works, if and
-          wherever such third-party notices normally appear. The contents
-          of the NOTICE file are for informational purposes only and
-          do not modify the License. You may add Your own attribution
-          notices within Derivative Works that You distribute, alongside
-          or as an addendum to the NOTICE text from the Work, provided
-          that such additional attribution notices cannot be construed
-          as modifying the License.
+    Lorsque l’Acceptant distribue ou représente l’Œuvre ou une Collection, l’Offrant accorde au bénéficiaire suivant, une licence sur l’Œuvre avec les mêmes termes et conditions que celle accordée à l’Acceptant.
+    Lorsque l’Acceptant distribue ou représente une Adaptation, l’Offrant accorde au bénéficiaire une licence sur l’œuvre dans des conditions identiques à celles accordées à l’Acceptant.
+    Si en vertu de la loi applicable, une quelconque disposition de la présente Licence était déclarée nulle, non valide ou inapplicable, cela n'aurait pas pour effet d'annuler ou de rendre inapplicables les autres dispositions de la Licence. Sans action ultérieure des parties, ladite disposition sera modifiée dans la mesure minimum nécessaire à sa validité et son applicabilité.
+    Aucune des conditions ou des dispositions de la présente Licence ne sera réputée comme ayant fait l'objet d'une renonciation, et aucune violation comme ayant été acceptée, sans le consentement écrit et signé de la partie concernée.
+    La présente Licence représente l'intégralité de l'accord conclu entre les parties à propos de l'Œuvre, objet de la présente Licence. Il n'existe aucun élément annexe, accord ou mandat portant sur cette Œuvre qui ne soit mentionné ci-dessus. L'Offrant ne sera tenu par aucune disposition supplémentaire qui pourrait apparaître dans une communication provenant de l'Acceptant. La présente Licence ne peut être modifiée sans l'accord écrit de l'Offrant et de l'Acceptant.
 
-      You may add Your own copyright statement to Your modifications and
-      may provide additional or different license terms and conditions
-      for use, reproduction, or distribution of Your modifications, or
-      for any such Derivative Works as a whole, provided Your use,
-      reproduction, and distribution of the Work otherwise complies with
-      the conditions stated in this License.
+    Avertissements de Creative Commons
 
-   5. Submission of Contributions. Unless You explicitly state otherwise,
-      any Contribution intentionally submitted for inclusion in the Work
-      by You to the Licensor shall be under the terms and conditions of
-      this License, without any additional terms or conditions.
-      Notwithstanding the above, nothing herein shall supersede or modify
-      the terms of any separate license agreement you may have executed
-      with Licensor regarding such Contributions.
+    Creative Commons n'est pas partie à cette Licence et n'offre aucune forme de garantie relative à l'Œuvre. Creative Commons décline toute responsabilité à l'égard de l'Acceptant ou de toute autre partie, quel que soit le fondement légal de cette responsabilité et quel que soit le préjudice subi, direct, indirect, matériel ou moral, qui surviendrait du fait de cette Licence. Cependant, si Creative Commons s'est expressément identifié comme Offrant pour mettre une Œuvre à disposition selon les termes de cette Licence, Creative Commons jouira de tous les droits et obligations d'un Offrant.
 
-   6. Trademarks. This License does not grant permission to use the trade
-      names, trademarks, service marks, or product names of the Licensor,
-      except as required for reasonable and customary use in describing the
-      origin of the Work and reproducing the content of the NOTICE file.
+    A l'exception des utilisations limitées à indiquer au public que l'Œuvre est mise à disposition sous la licence Creative Commons, Creative Commons n'autorise l'utilisation par aucune partie de la marque « Creative Commons » ou de toute autre indication ou logo de Creative Commons sans le consentement écrit préalable de Creative Commons. Toute utilisation autorisée devra se conformer aux directives d'utilisation de la marque en vigueur telles qu'elles pourront être publiées sur le site web ou sur demande. Cette restriction relative à la marque ne constitue pas une partie de cette Licence.
 
-   7. Disclaimer of Warranty. Unless required by applicable law or
-      agreed to in writing, Licensor provides the Work (and each
-      Contributor provides its Contributions) on an "AS IS" BASIS,
-      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
-      implied, including, without limitation, any warranties or conditions
-      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A
-      PARTICULAR PURPOSE. You are solely responsible for determining the
-      appropriateness of using or redistributing the Work and assume any
-      risks associated with Your exercise of permissions under this License.
-
-   8. Limitation of Liability. In no event and under no legal theory,
-      whether in tort (including negligence), contract, or otherwise,
-      unless required by applicable law (such as deliberate and grossly
-      negligent acts) or agreed to in writing, shall any Contributor be
-      liable to You for damages, including any direct, indirect, special,
-      incidental, or consequential damages of any character arising as a
-      result of this License or out of the use or inability to use the
-      Work (including but not limited to damages for loss of goodwill,
-      work stoppage, computer failure or malfunction, or any and all
-      other commercial damages or losses), even if such Contributor
-      has been advised of the possibility of such damages.
-
-   9. Accepting Warranty or Additional Liability. While redistributing
-      the Work or Derivative Works thereof, You may choose to offer,
-      and charge a fee for, acceptance of support, warranty, indemnity,
-      or other liability obligations and/or rights consistent with this
-      License. However, in accepting such obligations, You may act only
-      on Your own behalf and on Your sole responsibility, not on behalf
-      of any other Contributor, and only if You agree to indemnify,
-      defend, and hold each Contributor harmless for any liability
-      incurred by, or claims asserted against, such Contributor by reason
-      of your accepting any such warranty or additional liability.
-
-   END OF TERMS AND CONDITIONS
-
-   APPENDIX: How to apply the Apache License to your work.
-
-      To apply the Apache License to your work, attach the following
-      boilerplate notice, with the fields enclosed by brackets "{}"
-      replaced with your own identifying information. (Don't include
-      the brackets!)  The text should be enclosed in the appropriate
-      comment syntax for the file format. We also recommend that a
-      file or class name and description of purpose be included on the
-      same "printed page" as the copyright notice for easier
-      identification within third-party archives.
-
-   Copyright {yyyy} {name of copyright owner}
-
-   Licensed under the Apache License, Version 2.0 (the "License");
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an "AS IS" BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
+Creative Commons Corporation peut être contacté sur https://creativecommons.org/. 
