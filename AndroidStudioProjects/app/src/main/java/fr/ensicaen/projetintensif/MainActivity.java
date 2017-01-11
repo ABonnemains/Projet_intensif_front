@@ -1,6 +1,5 @@
 package fr.ensicaen.projetintensif;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
