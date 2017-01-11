@@ -29,8 +29,8 @@ public class MapManager {
         map.setMultiTouchControls(true);
 
         IMapController mapController = map.getController();
-        mapController.setZoom(9);
-        GeoPoint startPoint = new GeoPoint(48.8583, 2.2944);
+        mapController.setZoom(14);
+        GeoPoint startPoint = new GeoPoint(49.180796, -0.348736);
         mapController.setCenter(startPoint);
     }
 
