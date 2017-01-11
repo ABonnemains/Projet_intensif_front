@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity
             nickname_view.setText(nickname);
 
         MapManager mapManager = new MapManager(this, getApplicationContext());
-        
+
     }
 
     @Override
