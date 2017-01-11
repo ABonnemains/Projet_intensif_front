@@ -150,9 +150,10 @@ public class SignupActivity extends AppCompatActivity {
 
         _terms_and_conditions_checkbox = (CheckBox) findViewById(R.id.checkbox_terms_and_conditions);
 
+        //fr.ensicaen.projetintensif.TermsAndConditionsActivity://
         TextView terms_and_conditions = (TextView) findViewById(R.id.terms_and_conditions);
         terms_and_conditions.setText(Html.fromHtml("J'ai lu et j'accepte les " +
-                "<a href='www.ecole.ensicaen.fr/~mmarchand'>conditions d'utilisation</a>" + "."));
+                "<a href='fr.ensicaen.projetintensif.TermsAndConditionsActivity://www.ecole.ensicaen.fr'>conditions d'utilisation</a>" + "."));
         terms_and_conditions.setClickable(true);
         terms_and_conditions.setMovementMethod(LinkMovementMethod.getInstance());
     }
@@ -166,7 +167,7 @@ public class SignupActivity extends AppCompatActivity {
         _validate.setEnabled(false);
 
         final ProgressDialog progressDialog = new ProgressDialog(SignupActivity.this,
-                R.style.AppTheme_PopupOverlay);
+                R.style.AppTheme);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Création du compte en cours...");
         progressDialog.show();
@@ -275,7 +276,7 @@ public class SignupActivity extends AppCompatActivity {
         }
 
         // add other checks
-        if (terms_and_conditions_accepted) {
+        if (!terms_and_conditions_accepted) {
             _terms_and_conditions_checkbox.setError("Champ obligatoire.");
             valid = false;
         } else {
