@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity
         fabDanger.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Danger", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Assistance", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -42,8 +42,9 @@ public class MainActivity extends AppCompatActivity
         fabAssistance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Assistance", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Danger", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
             }
         });
 
@@ -101,18 +102,7 @@ public class MainActivity extends AppCompatActivity
 
 
         if (id == R.id.evenement) {
-            /*String eventCreated = "eventCreated";
-            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-            CreateEvent createEvent = new CreateEvent();
-            if(null == getFragmentManager().findFragmentByTag(eventCreated)){
-                fragmentTransaction.add(R.id.content_main, createEvent, eventCreated);
-                fragmentTransaction.addToBackStack("tag").commit();
-            }*/
-            /*Fragment frag = new CreateEvent();
-            android.app.FragmentManager fm = getFragmentManager();
-            fm.beginTransaction().replace(R.id.blank_fragment,frag).commit();*/
-
-            FragmentManager fm = getFragmentManager();
+             FragmentManager fm = getFragmentManager();
             CreateEvent ce = new CreateEvent();
             ce.show(fm,"Créer un évènement");
 

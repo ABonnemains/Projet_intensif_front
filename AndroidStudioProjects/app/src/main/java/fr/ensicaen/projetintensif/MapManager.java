@@ -47,6 +47,7 @@ public class MapManager {
         }
         MapOverlay mapOverlay = new MapOverlay(_activity, _ctx, map);
         mapOverlay.addOverlayPosition(new GeoPoint(currentLocation.getLatitude(), currentLocation.getLongitude()));
+        mapOverlay.addEventReceiver();
 
         IMapController mapController = map.getController();
         mapController.setZoom(14);
