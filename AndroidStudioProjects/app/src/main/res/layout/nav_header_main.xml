@@ -28,7 +28,8 @@
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:text="Jean Michel Altruiste"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:id="@+id/nickname_view" />
 
     <!--<TextView
         android:id="@+id/textView"
@@ -39,6 +40,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Score: 0"/>
+        android:text="Score: 0"
+        android:id="@+id/score_view" />
 
 </LinearLayout>

@@ -123,6 +123,7 @@ public class LoginActivity extends AppCompatActivity {
     public void onLoginSuccess() {
         _login_button.setEnabled(true);
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        intent.putExtra("nickname", _nickname.getText().toString());
         startActivity(intent);
         finish();
     }
