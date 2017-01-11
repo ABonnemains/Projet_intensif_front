@@ -16,7 +16,7 @@ Front End
 
 ## Le Projet
 
-![Projet](ressources/flyer.jpg)
+![Projet](ressources/Flyer.jpg)
 Qu' est ce que c'est ?   
  Roule ma poule est une application permettant de faciliter les sorties et les rencontres amicales entre personnes valides et les personnes à mobilité reduite.  
  L'application est en premier lieu une carte sur laquelle on peut créer un itineraire adapté aux PMR. Le second concept consiste à repertorier les activités et les sorties. Pour s'y rendre, l'application genère le meilleur itineraire possible. Les sorties et les trajet proposés ont la particularité d'etre adaptés aux personne à mobilité réduite.
