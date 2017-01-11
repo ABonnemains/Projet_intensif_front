@@ -14,14 +14,20 @@
 
         <!-- Dummy item to prevent AutoCompleteTextView from receiving focus -->
 
-        <!--<LinearLayout
+        <LinearLayout
             android:focusable="true"
             android:focusableInTouchMode="true"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>-->
+            android:layout_width="0px"
+            android:layout_height="0px" />
 
         <!-- :nextFocusUp and :nextFocusLeft have been set to the id of this component
         to prevent the dummy from receiving focus again -->
+        <AutoCompleteTextView android:id="@+id/autotext"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:nextFocusUp="@id/autotext"
+            android:nextFocusLeft="@id/autotext"/>
+
         <ImageView
             android:src="@drawable/logo_fond_carte"
             android:layout_width="match_parent"
@@ -29,12 +35,6 @@
             android:layout_weight="0.02"
             android:layout_gravity="top|center"
             android:adjustViewBounds="true" />
-
-        <AutoCompleteTextView android:id="@+id/autotext"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:nextFocusUp="@id/autotext"
-            android:nextFocusLeft="@id/autotext"/>
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"

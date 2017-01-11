@@ -276,7 +276,7 @@ public class SignupActivity extends AppCompatActivity {
         }
 
         // add other checks
-        if (terms_and_conditions_accepted) {
+        if (!terms_and_conditions_accepted) {
             _terms_and_conditions_checkbox.setError("Champ obligatoire.");
             valid = false;
         } else {
