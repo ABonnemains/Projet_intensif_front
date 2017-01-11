@@ -12,6 +12,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.sql.Timestamp;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -30,6 +31,12 @@ public class Communication {
     private static String _token;
 
     private String[] infoLogin;
+    private Object[] infoRegister;
+
+    public Communication(String login, String pw, String pwConfirm, String name, String surname, String phoneNumber, Timestamp birthDate){
+        infoRegister = new Object[]{login, pw, pwConfirm, name, surname,phoneNumber,birthDate};
+        _currentRequestType = RequestType.REGISTER;
+    }
 
     public Communication(String login, String pw)
     {
@@ -45,6 +52,7 @@ public class Communication {
                     communicate(infoLogin[0], infoLogin[1]);
                     break;
                 case REGISTER:
+                    communicate((String)infoRegister[0],(String)infoRegister[1],(String)infoRegister[2],(String)infoRegister[3],(String)infoRegister[4],(String)infoRegister[5],(Timestamp)infoRegister[6]);
                     break;
 
                 default:
@@ -64,6 +72,25 @@ public class Communication {
             jsonObj.put("password",pwd);
 
             _token = sendPost(jsonObj, _urlLogin);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void communicate(String login, String pw, String pwConfirm, String name, String surname, String phoneNumber, Timestamp birthDate){
+        JSONObject jsonObj = new JSONObject();
+
+        try {
+            jsonObj.put("login", login);
+            jsonObj.put("password",pw);
+            jsonObj.put("password_confirmation",pwConfirm);
+            jsonObj.put("user_name",name);
+            jsonObj.put("user_surname",surname);
+            jsonObj.put("user_phone",phoneNumber);
+            jsonObj.put("user_birthdate",birthDate);
+
+            sendPost(jsonObj,_urlRegister);
 
         } catch (Exception e) {
             e.printStackTrace();
