@@ -1,5 +1,6 @@
 package fr.ensicaen.projetintensif;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.DialogFragment;
 import android.app.TimePickerDialog;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -57,6 +59,7 @@ public class CreateEvent extends DialogFragment {
 
             @Override
             public void onClick(View v) {
+                hideKeyboard(v);
                 Calendar calendar = Calendar.getInstance();
                 int mYear = calendar.get(Calendar.YEAR);
                 int mMonth = calendar.get(Calendar.MONTH);
@@ -83,6 +86,7 @@ public class CreateEvent extends DialogFragment {
 
             @Override
             public void onClick(View v) {
+                hideKeyboard(v);
                 Calendar calendar = Calendar.getInstance();
                 int mHour = calendar.get(Calendar.HOUR);
                 int mMinute = calendar.get(Calendar.MINUTE);
@@ -102,15 +106,9 @@ public class CreateEvent extends DialogFragment {
                 mTimePicker.show();  }
         });
     }
+
+    public void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager =(InputMethodManager)getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
 }
-
-/*
-String eventCreated = "eventCreated";
-            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-            CreateEvent createEvent = new CreateEvent();
-            if(null == getFragmentManager().findFragmentByTag(eventCreated)){
-                fragmentTransaction.add(R.id.content_main, createEvent, eventCreated);
-                fragmentTransaction.addToBackStack("tag").commit();
-            }
-
- */

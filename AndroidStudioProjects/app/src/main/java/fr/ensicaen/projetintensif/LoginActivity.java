@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -27,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText _password;
     private Button _login_button;
     private TextView _link_signup;
+    private Boolean _loginSuccessful;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -84,7 +86,11 @@ public class LoginActivity extends AppCompatActivity {
         _login_button.setEnabled(false);
 
         final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
-                R.style.AppTheme);
+                R.style.AppTheme_PopupOverlay);
+        /*final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
+                R.style.AppTheme_PopupOverlay);*/
+
+        final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this, R.style.LoadingTheme);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Connexion en cours...");
         progressDialog.show();
@@ -93,14 +99,29 @@ public class LoginActivity extends AppCompatActivity {
         String password = _password.getText().toString();
 
         // process of authentification
+        new LoginTask(this).execute(new Communication(nickname, password)); //----------------------------------------------------------------------------------------------------------------------------------------------
 
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
                         onLoginSuccess();
+                        if(_loginSuccessful){
+                           onLoginSuccess();
+                        }
+                        else{
+                            onLoginFailed();
+                        }
                         progressDialog.dismiss();
                     }
                 }, 3000);
+                }, 20000);
+
+        _login_button.setEnabled(true);
+    }
+
+    public void setLoginSuccess(String token)
+    {
+        _loginSuccessful = (token != null);
     }
 
     @Override
@@ -109,7 +130,6 @@ public class LoginActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 // response of successfull signup, currently finish the activity and launch the main activity
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                intent.putExtra("nickname", data.getStringExtra("signup_nickname"));
                 startActivity(intent);
                 this.finish();
             }
@@ -124,7 +144,6 @@ public class LoginActivity extends AppCompatActivity {
     public void onLoginSuccess() {
         _login_button.setEnabled(true);
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        intent.putExtra("nickname", _nickname.getText().toString());
         startActivity(intent);
         finish();
     }

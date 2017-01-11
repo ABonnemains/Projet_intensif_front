@@ -2,32 +2,34 @@ package fr.ensicaen.projetintensif;
 
 
 import android.app.FragmentManager;
-import android.content.BroadcastReceiver;
+
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.TaskStackBuilder;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 
 import org.osmdroid.config.Configuration;
+import org.osmdroid.views.MapView;
 
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
-    private MapManager mapManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,11 +39,35 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         FloatingActionButton fabDanger = (FloatingActionButton) findViewById(R.id.fabDanger);
+
+        MapView map = (MapView) findViewById(R.id.map);
+        final MapOverlay mapOverlay = new MapOverlay(this, getApplicationContext(), map);
+
         fabDanger.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Danger", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Assistance", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
+                NotificationCompat.Builder mBuilder =
+                        new NotificationCompat.Builder(getApplication())
+                                .setContentTitle("Un utilisateur a besoin d'assistance.")
+                                .setSmallIcon(R.drawable.alerte)
+                                .setContentText("A l'aide.");
+                Intent resultIntent = new Intent(getApplication(), LoginActivity.class);
+                TaskStackBuilder stackBuilder = TaskStackBuilder.create(getApplication());
+                stackBuilder.addParentStack(LoginActivity.class);
+                stackBuilder.addNextIntent(resultIntent);
+                PendingIntent resultPendingIntent =
+                        stackBuilder.getPendingIntent(
+                                0,
+                                PendingIntent.FLAG_UPDATE_CURRENT
+                        );
+                mBuilder.setContentIntent(resultPendingIntent);
+                NotificationManager mNotificationManager =
+                        (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                mNotificationManager.notify(1, mBuilder.build());
             }
         });
 
@@ -50,7 +76,17 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Assistance", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Danger", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                mapOverlay.addEventReceiver();
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mapOverlay.removeEventReceiver();
+                    }
+                }, 10000);
+
             }
         });
 
@@ -63,24 +99,8 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        View headerLayout = navigationView.getHeaderView(0);
 
-        final TextView nickname_view = (TextView) headerLayout.findViewById(R.id.nickname_view);
-        nickname_view.setClickable(true);
-        nickname_view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ProfilConfigurationActivity.class);
-                intent.putExtra("nickname", nickname_view.getText().toString());
-                startActivity(intent);
-            }
-        });
-        String nickname = getIntent().getStringExtra("nickname");
-        if(!nickname.isEmpty())
-            nickname_view.setText(nickname);
-
-        mapManager = new MapManager(this, getApplicationContext());
-
+        MapManager mapManager = new MapManager(this, getApplicationContext());
     }
 
     @Override
@@ -98,11 +118,6 @@ public class MainActivity extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
     }
 
     @Override
@@ -141,6 +156,7 @@ public class MainActivity extends AppCompatActivity
             fm.beginTransaction().replace(R.id.blank_fragment,frag).commit();*/
 
             FragmentManager fm = getFragmentManager();
+             FragmentManager fm = getFragmentManager();
             CreateEvent ce = new CreateEvent();
             ce.show(fm,"Créer un évènement");
 
@@ -160,9 +176,5 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    public MapManager getMapManager() {
-        return mapManager;
     }
 }
