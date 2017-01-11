@@ -103,4 +103,5 @@ Fonctionalités Secondaire
 ```
 
 ## Mockup
-![connexion](ressources/ecran-connexion.png)
+###### Ecran de connexion  
+![connexion](ressources/ecran_connexion.png)
