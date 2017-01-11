@@ -24,11 +24,27 @@
     <include layout="@layout/content_main" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/fabDanger"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        app:srcCompat="@drawable/alerte"
+        app:backgroundTint="@android:color/white"
+        android:adjustViewBounds="true"
+        android:clickable="false"
+        android:scaleType="fitXY" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabAssistance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|left"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@drawable/signalement_obstacle"
+        app:backgroundTint="@android:color/white"
+        android:clickable="true"
+        android:adjustViewBounds="false"
+        android:scaleType="fitXY" />
 
 </android.support.design.widget.CoordinatorLayout>
