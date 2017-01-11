@@ -1,5 +1,4 @@
-# Projet_intensif_front
-Front End
+
 ![picto](ressources/Picto.png)
 
 ![logo](ressources/logo.png)
