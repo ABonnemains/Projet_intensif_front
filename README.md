@@ -8,7 +8,7 @@ Front End
 
 ## Table
 
-- [Le Projet](#projet)
+- [Le Projet](#le-projet)
 - [Technologies utilisées](#technologies-utilisees)
 - [Fonctionalités](#fonctionalites)
 - [Repartition des tâches](#repartition-des-taches)
@@ -78,29 +78,28 @@ Afin de rendre attractif l'utilisation de l'application un système de points es
 - Clara Thierry
 
 ## Fonctionalités
-```
+
 Fonctionalités Prioritaire
-    [B] S'enregistrer
-    [B] Se connecter
-    [B] Créer un trajet
-    [B] Partager un trajet
-    [ ] Rechercher un trajet
-    [B] Créer une demande d'assistance
-    [B] Signaler un obstacle / une dificulté sur le trajet
-    [ ] Parametrer son profil
+- [x] S'enregistrer
+- [x] Se connecter
+- [x] Créer un trajet
+- [x] Partager un trajet
+- [ ] Rechercher un trajet
+- [x] Créer une demande d'assistance
+- [x] Signaler un obstacle / une dificulté sur le trajet
+- [ ] Parametrer son profil
 
 Fonctionalités Secondaire
-    [ ] Créer un évenement
-    [ ] S'inscrire à un évenement
-    [ ] Enregistrer un trajet effectué
-    [ ] Notation des trajets
-    [ ] Notation accesibilité (PMR)
-    [ ] Recherche d'utilisateur
-    [ ] Notation utilisateur
-    [ ] Notation obstacle
-    [ ] Système de classement
-    [ ] Dépenser les points reçu (promotion)
-```
+- [ ] Créer un évenement
+- [ ] S'inscrire à un évenement
+- [ ] Enregistrer un trajet effectué
+- [ ] Notation des trajets
+- [ ] Notation accesibilité (PMR)
+- [ ] Recherche d'utilisateur
+- [ ] Notation utilisateur
+- [ ] Notation obstacle
+- [ ] Système de classement
+- [ ] Dépenser les points reçu (promotion)
 
 ## Mockup
 ###### Ecran de connexion  
