@@ -42,8 +42,9 @@ public class MapManager {
             _currentLocation = currentLocation;
         }
         else {
-            currentLocation.setLongitude(48.8583);
-            currentLocation.setLatitude(2.2944);
+            currentLocation = new Location("default");
+            currentLocation.setLatitude(48.8583);
+            currentLocation.setLongitude(2.2944);
         }
 
         IMapController mapController = map.getController();
