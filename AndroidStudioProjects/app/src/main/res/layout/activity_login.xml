@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:weightSum="1"
+        android:baselineAligned="false"
+        android:clipToPadding="false">
+
+        <!-- Dummy item to prevent AutoCompleteTextView from receiving focus -->
+
+        <!--<LinearLayout
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>-->
+
+        <!-- :nextFocusUp and :nextFocusLeft have been set to the id of this component
+        to prevent the dummy from receiving focus again -->
+        <ImageView
+            android:src="@drawable/logo_fond_carte"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.02"
+            android:layout_gravity="top|center"
+            android:adjustViewBounds="true" />
+
+        <AutoCompleteTextView android:id="@+id/autotext"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:nextFocusUp="@id/autotext"
+            android:nextFocusLeft="@id/autotext"/>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+            <EditText android:id="@+id/input_login_nickname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:hint="Pseudo"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+            <EditText android:id="@+id/input_login_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:hint="Mot de passe"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.v7.widget.AppCompatButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:padding="12dp"
+            android:text="Connexion"
+            android:id="@+id/button_login" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:text="Pas de compte ? Créez-en un !"
+            android:gravity="center"
+            android:textSize="16dip"
+            android:id="@+id/link_signup"/>
+    </LinearLayout>
+
+</ScrollView>
