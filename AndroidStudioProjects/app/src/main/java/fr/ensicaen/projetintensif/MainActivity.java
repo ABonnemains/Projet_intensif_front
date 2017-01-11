@@ -49,6 +49,8 @@ public class MainActivity extends AppCompatActivity
 
 
         MapManager mapManager = new MapManager(this, getApplicationContext());
+
+        new GetTask(this).execute(new Communication("test"));
     }
 
     @Override

@@ -77,6 +77,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void login() {
+        _loginSuccessful = false;
         // verification of login and password
         if (!validEntry()) {
             onLoginFailed();
