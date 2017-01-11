@@ -112,6 +112,10 @@ public class MainActivity extends AppCompatActivity
             /*Fragment frag = new BlankFragment();
             FragmentManager ft = getSupportFragmentManager();
             ft.beginTransaction().replace(R.id.hello,frag).commit();*/
+        } else if (id == R.id.recherche){
+            FragmentManager fm = getFragmentManager();
+            Recherche rechercheFragment = new Recherche();
+            rechercheFragment.show(fm,"Recherche");
         }
 
 

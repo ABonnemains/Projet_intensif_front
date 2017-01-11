@@ -5,7 +5,7 @@
         <item
             android:id="@+id/evenement"
             android:title="Créer un évenement" />
-        <item android:id="@+id/itemSearch"
+        <item android:id="@+id/recherche"
             appNs:showAsAction="ifRoom"
             android:title="Rechercher" />
         <item
