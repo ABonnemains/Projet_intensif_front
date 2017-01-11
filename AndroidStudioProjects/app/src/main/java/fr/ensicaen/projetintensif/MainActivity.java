@@ -2,7 +2,10 @@ package fr.ensicaen.projetintensif;
 
 
 import android.app.FragmentManager;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
@@ -23,6 +26,8 @@ import org.osmdroid.config.Configuration;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private MapManager mapManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +79,7 @@ public class MainActivity extends AppCompatActivity
         if(!nickname.isEmpty())
             nickname_view.setText(nickname);
 
-        MapManager mapManager = new MapManager(this, getApplicationContext());
+        mapManager = new MapManager(this, getApplicationContext());
 
     }
 
@@ -93,6 +98,11 @@ public class MainActivity extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
     }
 
     @Override
@@ -150,5 +160,9 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public MapManager getMapManager() {
+        return mapManager;
     }
 }

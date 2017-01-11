@@ -1,11 +1,16 @@
 package fr.ensicaen.projetintensif;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.preference.PreferenceManager;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 
 import org.osmdroid.api.IMapController;
@@ -13,13 +18,18 @@ import org.osmdroid.config.Configuration;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
+import org.osmdroid.views.overlay.OverlayItem;
+import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider;
+import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay;
 
 import java.util.List;
 
 public class MapManager {
     private Activity _activity;
     private Context _ctx;
-    private Location _currentLocation;
+    private GeoPoint _currentLocation;
+    private LocationListener _locationListener;
+    private LocationManager _locationManager;
 
     public MapManager(Activity activity, Context ctx) {
         _activity = activity;
@@ -28,29 +38,40 @@ public class MapManager {
         init();
     }
 
-    private void init()
-    {
+    private void init() {
         Configuration.getInstance().load(_ctx, PreferenceManager.getDefaultSharedPreferences(_ctx));
 
         MapView map = (MapView) _activity.findViewById(R.id.map);
         map.setTileSource(TileSourceFactory.MAPNIK);
         map.setMultiTouchControls(true);
 
-        Location currentLocation = getLocation();
-        if (currentLocation != null) {
-            _currentLocation = currentLocation;
+        /*Intent intent = new Intent(_activity.getApplicationContext(), LocationService.class);
+
+        _activity.startService(intent);
+
+        GeoPoint point = new GeoPoint(intent.getDoubleExtra("Latitude", 49.17523), intent.getDoubleExtra("Longitude", -0.34740));
+
+        if( point != null ) {
+            _currentLocation = point;
         }
         else {
-            currentLocation = new Location("default");
-            currentLocation.setLatitude(48.8583);
-            currentLocation.setLongitude(2.2944);
+            _currentLocation = new GeoPoint(48.8583, 2.2944);
         }
+        */
 
         IMapController mapController = map.getController();
         mapController.setZoom(14);
 
-        GeoPoint startPoint = new GeoPoint(currentLocation.getLatitude(), currentLocation.getLongitude());
-        mapController.setCenter(startPoint);
+        /*mapController.setCenter(_currentLocation);*/
+        GpsMyLocationProvider gpsMyLocationProvider = new GpsMyLocationProvider(_activity.getApplicationContext());
+        gpsMyLocationProvider.setLocationUpdateMinDistance(2.0f);
+        gpsMyLocationProvider.setLocationUpdateMinTime(1000);
+        MyLocationNewOverlay myLocationNewOverlay = new MyLocationNewOverlay(map);
+        myLocationNewOverlay.enableFollowLocation();
+        _currentLocation = myLocationNewOverlay.getMyLocation();
+        map.getOverlays().add(myLocationNewOverlay);
+
+        map.invalidate();
     }
 
     private Location getLocation()
