@@ -1,6 +1,7 @@
 package fr.ensicaen.projetintensif;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
@@ -195,6 +196,7 @@ public class SignupActivity extends AppCompatActivity {
                         progressDialog.dismiss();
                     }
                 }, 3000);
+
     }
 
 

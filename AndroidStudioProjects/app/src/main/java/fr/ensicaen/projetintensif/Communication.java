@@ -54,7 +54,6 @@ public class Communication {
                 case REGISTER:
                     communicate((String)infoRegister[0],(String)infoRegister[1],(String)infoRegister[2],(String)infoRegister[3],(String)infoRegister[4],(String)infoRegister[5],(Timestamp)infoRegister[6]);
                     break;
-
                 default:
                     break;
             }
@@ -90,7 +89,10 @@ public class Communication {
             jsonObj.put("user_phone",phoneNumber);
             jsonObj.put("user_birthdate",birthDate);
 
-            sendPost(jsonObj,_urlRegister);
+            String res = sendPost(jsonObj, _urlRegister);
+            if (res.equals("OK")){
+                communicate(login, pw);
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -122,7 +124,7 @@ public class Communication {
 
         int responseCode = con.getResponseCode();
 
-        Log.d("POST : url : ",  _serverURL + _urlLogin);
+        Log.d("POST : url : ",  _serverURL + urlPost);
         Log.d("POST : jsonObject : ", jsonObject.toString());
         Log.d("POST : Response Code : ", responseCode + "");
 
