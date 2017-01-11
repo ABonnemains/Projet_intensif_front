@@ -1,10 +1,12 @@
 package fr.ensicaen.projetintensif;
 
+import android.app.Fragment;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -13,7 +15,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
 import org.osmdroid.config.Configuration;
 
 
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
 
         MapManager mapManager = new MapManager(this, getApplicationContext());
         mapManager.init();
@@ -94,16 +96,31 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.evenement) {/*
-            Fragment frag = new BlankFragment2();
-            FragmentManager ft = getSupportFragmentManager();
-            ft.beginTransaction().replace(R.id.hello,frag).commit();*/
+
+        if (id == R.id.evenement) {
+            /*String eventCreated = "eventCreated";
+            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+            CreateEvent createEvent = new CreateEvent();
+            if(null == getFragmentManager().findFragmentByTag(eventCreated)){
+                fragmentTransaction.add(R.id.content_main, createEvent, eventCreated);
+                fragmentTransaction.addToBackStack("tag").commit();
+            }*/
+            /*Fragment frag = new CreateEvent();
+            android.app.FragmentManager fm = getFragmentManager();
+            fm.beginTransaction().replace(R.id.blank_fragment,frag).commit();*/
+
+            FragmentManager fm = getFragmentManager();
+            CreateEvent ce = new CreateEvent();
+            ce.show(fm,"creer un evenement");
+
+
         } else if (id == R.id.parametres) {
             /*Fragment frag = new BlankFragment();
             FragmentManager ft = getSupportFragmentManager();
-            ft.beginTransaction().replace(R.id.hello,frag).commit();
-*/
+            ft.beginTransaction().replace(R.id.hello,frag).commit();*/
         }
+
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
