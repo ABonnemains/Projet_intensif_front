@@ -80,13 +80,13 @@ Afin de rendre attractif l'utilisation de l'application un système de points es
 ## Fonctionalités
 ```
 Fonctionalités Prioritaire
-    [ ] S'enregistrer
-    [ ] Se connecter
-    [ ] Créer un trajet
-    [ ] Partager un trajet
+    [B] S'enregistrer
+    [B] Se connecter
+    [B] Créer un trajet
+    [B] Partager un trajet
     [ ] Rechercher un trajet
-    [ ] Créer une demande d'assistance
-    [ ] Signaler un obstacle / une dificulté sur le trajet
+    [B] Créer une demande d'assistance
+    [B] Signaler un obstacle / une dificulté sur le trajet
     [ ] Parametrer son profil
 
 Fonctionalités Secondaire
@@ -103,4 +103,4 @@ Fonctionalités Secondaire
 ```
 
 ## Mockup
-index on MMarchand: 119eada Initialisation du projet
+![connexion](ressources/ecran-connexion.png)
