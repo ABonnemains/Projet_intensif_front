@@ -19,15 +19,19 @@ import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.ItemizedIconOverlay;
 import org.osmdroid.views.overlay.MapEventsOverlay;
+import org.osmdroid.views.overlay.Overlay;
 import org.osmdroid.views.overlay.OverlayItem;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MapOverlay {
 
     private Activity activity;
     private Context context;
     private MapView mapView;
+
+    private int numberOverlay;
 
     public MapOverlay(Activity activity, Context context, MapView mapView) {
         this.activity = activity;
@@ -120,7 +124,17 @@ public class MapOverlay {
             }
         };
         MapEventsOverlay mapEventsOverlay = new MapEventsOverlay(mReceive);
+        List<Overlay> listOverlay = mapView.getOverlays();
+        numberOverlay = listOverlay.size();
         mapView.getOverlays().add(mapEventsOverlay);
         mapView.invalidate();
+    }
+
+    public void removeEventReceiver(){
+        List<Overlay> listOverlay = mapView.getOverlays();
+        System.out.println(listOverlay);
+        if(numberOverlay > 0 && numberOverlay < listOverlay.size()){
+            listOverlay.remove(numberOverlay);
+        }
     }
 }

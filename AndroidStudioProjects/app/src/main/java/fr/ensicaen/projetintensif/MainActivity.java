@@ -3,6 +3,7 @@ package fr.ensicaen.projetintensif;
 
 import android.app.FragmentManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -17,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import org.osmdroid.config.Configuration;
+import org.osmdroid.views.MapView;
 
 
 public class MainActivity extends AppCompatActivity
@@ -30,6 +32,10 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         FloatingActionButton fabDanger = (FloatingActionButton) findViewById(R.id.fabDanger);
+
+        MapView map = (MapView) findViewById(R.id.map);
+        final MapOverlay mapOverlay = new MapOverlay(this, getApplicationContext(), map);
+
         fabDanger.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -44,6 +50,14 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View view) {
                 Snackbar.make(view, "Danger", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                mapOverlay.addEventReceiver();
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mapOverlay.removeEventReceiver();
+                    }
+                }, 10000);
 
             }
         });
