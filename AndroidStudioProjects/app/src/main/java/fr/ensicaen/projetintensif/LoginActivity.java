@@ -84,7 +84,7 @@ public class LoginActivity extends AppCompatActivity {
         _login_button.setEnabled(false);
 
         final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
-                R.style.AppTheme_PopupOverlay);
+                R.style.AppTheme);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Connexion en cours...");
         progressDialog.show();

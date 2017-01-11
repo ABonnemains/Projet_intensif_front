@@ -167,7 +167,7 @@ public class SignupActivity extends AppCompatActivity {
         _validate.setEnabled(false);
 
         final ProgressDialog progressDialog = new ProgressDialog(SignupActivity.this,
-                R.style.AppTheme_PopupOverlay);
+                R.style.AppTheme);
         progressDialog.setIndeterminate(true);
         progressDialog.setMessage("Création du compte en cours...");
         progressDialog.show();
