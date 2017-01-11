@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity
 
             FragmentManager fm = getFragmentManager();
             CreateEvent ce = new CreateEvent();
-            ce.show(fm,"creer un evenement");
+            ce.show(fm,"Créer un évènement");
 
 
         } else if (id == R.id.parametres) {
