@@ -2,16 +2,22 @@ package fr.ensicaen.projetintensif;
 
 
 import android.app.FragmentManager;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.TaskStackBuilder;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -41,6 +47,25 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View view) {
                 Snackbar.make(view, "Assistance", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
+                NotificationCompat.Builder mBuilder =
+                        new NotificationCompat.Builder(getApplication())
+                                .setContentTitle("Un utilisateur a besoin d'assistance.")
+                                .setSmallIcon(R.drawable.alerte)
+                                .setContentText("A l'aide.");
+                Intent resultIntent = new Intent(getApplication(), LoginActivity.class);
+                TaskStackBuilder stackBuilder = TaskStackBuilder.create(getApplication());
+                stackBuilder.addParentStack(LoginActivity.class);
+                stackBuilder.addNextIntent(resultIntent);
+                PendingIntent resultPendingIntent =
+                        stackBuilder.getPendingIntent(
+                                0,
+                                PendingIntent.FLAG_UPDATE_CURRENT
+                        );
+                mBuilder.setContentIntent(resultPendingIntent);
+                NotificationManager mNotificationManager =
+                        (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                mNotificationManager.notify(1, mBuilder.build());
             }
         });
 
