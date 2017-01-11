@@ -109,6 +109,7 @@ public class LoginActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 // response of successfull signup, currently finish the activity and launch the main activity
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.putExtra("nickname", data.getStringExtra("signup_nickname"));
                 startActivity(intent);
                 this.finish();
             }
