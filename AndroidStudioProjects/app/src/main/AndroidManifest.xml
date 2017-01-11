@@ -31,6 +31,15 @@
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
+        <activity
+            android:name=".TermsAndConditionsActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="android.intent.action.VIEW" />
+                <data android:scheme="fr.ensicaen.projetintensif.TermsAndConditionsActivity" />
+            </intent-filter>
+        </activity>
 
     </application>
 
