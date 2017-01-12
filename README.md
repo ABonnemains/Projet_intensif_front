@@ -101,7 +101,22 @@ Fonctionalités Secondaire
 - [ ] Dépenser les points reçu (promotion)
 
 ## Mockup
+
 ###### Ecran de connexion  
 ![connexion](ressources/ecran_connexion.png)
+
 ###### Ecran de profil  
-![connexion](ressources/ecran_profil.png)
+![connexion](ressources/ecran_profil.png)  
+Ecran de Profil permettant de viusaliser le pseudo de l'utilisateur ainsi que le nombres de points qu'il possède.  
+Depuis cet écran l'utilisateur peut aussi créer et rechercher un évènement.
+
+###### Ecran Principal
+![principal](ressources/ecran_principal.png)  
+Cet écran principal contient la carte qui affiche la position actuelle de l'utilisateur.  
+Depuis cet écran plusieurs interactions son possible:
+
+
+![principal](ressources/alerte.png)  -  La demande d'alerte grace à un appui sur le logo situé en bas à gauche.
+
+
+![principal](ressources/obstacle.png) - La création d'un obstacle, pour cela l'utilisateur appui sur le boutton situé en bas à droite, puis selectionne l'endroit de l'obstacle en faissant un appui long sur la carte. 
