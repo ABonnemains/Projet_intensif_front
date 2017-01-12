@@ -50,9 +50,9 @@ public class MainActivity extends AppCompatActivity
 
                 NotificationCompat.Builder mBuilder =
                         new NotificationCompat.Builder(getApplication())
-                                .setContentTitle("Un utilisateur a besoin d'assistance.")
+                                .setContentTitle("Un utilisateur est en difficulté.")
                                 .setSmallIcon(R.drawable.alerte)
-                                .setContentText("A l'aide.");
+                                .setContentText("Proposez votre aide.");
                 Intent resultIntent = new Intent(getApplication(), LoginActivity.class);
                 TaskStackBuilder stackBuilder = TaskStackBuilder.create(getApplication());
                 stackBuilder.addParentStack(LoginActivity.class);
@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity
         fabAssistance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Danger", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Pour signaler un danger, appuyez sur la carte.", 10000)
                         .setAction("Action", null).show();
                 mapOverlay.addEventReceiver();
                 final Handler handler = new Handler();

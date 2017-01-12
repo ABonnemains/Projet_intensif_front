@@ -90,12 +90,7 @@ public class MapOverlay {
     public void addEventReceiver() {
         MapEventsReceiver mReceive = new MapEventsReceiver() {
             @Override
-            public boolean singleTapConfirmedHelper(GeoPoint p) {
-                return true;
-            }
-
-            @Override
-            public boolean longPressHelper(final GeoPoint p) {
+            public boolean singleTapConfirmedHelper(final GeoPoint p) {
                 //Send point to server
 
                 AlertDialog.Builder alert = new AlertDialog.Builder(activity);
@@ -122,6 +117,11 @@ public class MapOverlay {
                 alert.show();
                 return true;
             }
+
+            @Override
+            public boolean longPressHelper(final GeoPoint p) {
+                return true;
+            }
         };
         MapEventsOverlay mapEventsOverlay = new MapEventsOverlay(mReceive);
         List<Overlay> listOverlay = mapView.getOverlays();
@@ -132,7 +132,6 @@ public class MapOverlay {
 
     public void removeEventReceiver(){
         List<Overlay> listOverlay = mapView.getOverlays();
-        System.out.println(listOverlay);
         if(numberOverlay > 0 && numberOverlay < listOverlay.size()){
             listOverlay.remove(numberOverlay);
         }
