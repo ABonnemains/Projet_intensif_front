@@ -1,6 +1,5 @@
 package fr.ensicaen.projetintensif;
 
-
 import android.app.FragmentManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -16,11 +15,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import org.json.JSONObject;
 import org.osmdroid.config.Configuration;
-
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private JSONObject getResult;
+    private int getID = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +52,7 @@ public class MainActivity extends AppCompatActivity
 
         MapManager mapManager = new MapManager(this, getApplicationContext());
 
-        new GetTask(this).execute(new Communication("test"));
+        //new GetTask(this).execute(new Communication("test"));
     }
 
     @Override
@@ -116,10 +118,13 @@ public class MainActivity extends AppCompatActivity
             ft.beginTransaction().replace(R.id.hello,frag).commit();*/
         }
 
-
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void setGetResult(JSONObject res){
+        getResult = res;
+        getID++;
     }
 }

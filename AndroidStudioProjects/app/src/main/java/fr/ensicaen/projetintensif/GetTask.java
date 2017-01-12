@@ -5,9 +5,9 @@ import android.os.AsyncTask;
 
 public class GetTask extends AsyncTask<Communication,Void,Communication> {
 
-    private Activity activity;
+    private MainActivity activity;
 
-    public GetTask(Activity monActivity){this.activity = monActivity;}
+    public GetTask(MainActivity monActivity){this.activity = monActivity;}
 
     protected Communication doInBackground(Communication... handler){
         handler[0].communicate();
@@ -16,6 +16,6 @@ public class GetTask extends AsyncTask<Communication,Void,Communication> {
 
     protected void onPostExecute(Communication handler)
     {
-
+        activity.setGetResult(handler.getGetResult());
     }
 }

@@ -98,7 +98,7 @@ public class LoginActivity extends AppCompatActivity {
         String password = _password.getText().toString();
 
         // process of authentification
-        new LoginTask(this).execute(new Communication(nickname, password)); //----------------------------------------------------------------------------------------------------------------------------------------------
+        new LoginTask(this).execute(new Communication(nickname, password));
 
         new android.os.Handler().postDelayed(
                 new Runnable() {
