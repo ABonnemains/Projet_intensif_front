@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity
     private MapManager mapManager;
     private Road roadResult;
     private ArrayList<Polyline> roadOverlays;
+    public Location location;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,32 +56,7 @@ public class MainActivity extends AppCompatActivity
         MapView map = (MapView) findViewById(R.id.map);
         final MapOverlay mapOverlay = new MapOverlay(this, getApplicationContext(), map);
 
-        fabDanger.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Assistance", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
 
-                NotificationCompat.Builder mBuilder =
-                        new NotificationCompat.Builder(getApplication())
-                                .setContentTitle("Un utilisateur est en difficulté.")
-                                .setSmallIcon(R.drawable.alerte)
-                                .setContentText("Proposez votre aide.");
-                Intent resultIntent = new Intent(getApplication(), LoginActivity.class);
-                TaskStackBuilder stackBuilder = TaskStackBuilder.create(getApplication());
-                stackBuilder.addParentStack(LoginActivity.class);
-                stackBuilder.addNextIntent(resultIntent);
-                PendingIntent resultPendingIntent =
-                        stackBuilder.getPendingIntent(
-                                0,
-                                PendingIntent.FLAG_UPDATE_CURRENT
-                        );
-                mBuilder.setContentIntent(resultPendingIntent);
-                NotificationManager mNotificationManager =
-                        (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-                mNotificationManager.notify(1, mBuilder.build());
-            }
-        });
 
         FloatingActionButton fabAssistance = (FloatingActionButton) findViewById(R.id.fabAssistance);
         fabAssistance.setOnClickListener(new View.OnClickListener() {
@@ -135,11 +111,42 @@ public class MainActivity extends AppCompatActivity
 
 
         MapManager mapManager = new MapManager(this, getApplicationContext());
-        Location location = mapManager.getLocation();
+        location = mapManager.getLocation();
         getEvenements(location.getLatitude(),location.getLongitude());
         getObstacles(location.getLatitude(),location.getLongitude());
 
         new GetTask(this).execute(new Communication("test"));
+
+        fabDanger.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                askAssistance(location.getLatitude(),location.getLongitude());
+
+                /*Snackbar.make(view, "Assistance", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+
+                NotificationCompat.Builder mBuilder =
+                        new NotificationCompat.Builder(getApplication())
+                                .setContentTitle("Un utilisateur est en difficulté.")
+                                .setSmallIcon(R.drawable.alerte)
+                                .setContentText("Proposez votre aide.");
+                Intent resultIntent = new Intent(getApplication(), LoginActivity.class);
+                TaskStackBuilder stackBuilder = TaskStackBuilder.create(getApplication());
+                stackBuilder.addParentStack(LoginActivity.class);
+                stackBuilder.addNextIntent(resultIntent);
+                PendingIntent resultPendingIntent =
+                        stackBuilder.getPendingIntent(
+                                0,
+                                PendingIntent.FLAG_UPDATE_CURRENT
+                        );
+                mBuilder.setContentIntent(resultPendingIntent);
+                NotificationManager mNotificationManager =
+                        (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                mNotificationManager.notify(1, mBuilder.build());*/
+            }
+        });
+
     }
 
     @Override
@@ -215,6 +222,10 @@ public class MainActivity extends AppCompatActivity
 
     public void getObstacles(double latitude, double longitude){
         new GetTask((MainActivity) this).execute(new Communication(latitude, longitude, Communication.RequestType.GET_ALL_OBSTACLES));
+    }
+
+    public void askAssistance(double latitude, double longitude){
+        new GetTask((MainActivity) this).execute(new Communication(latitude, longitude, Communication.RequestType.ASK_ASSIST));
     }
 
     public MapManager getMapManager() {

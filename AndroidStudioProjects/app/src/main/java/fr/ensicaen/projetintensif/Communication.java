@@ -24,7 +24,8 @@ public class Communication {
         OBSTACLE,
         GET_EVENT,
         GET_ALL_EVENTS,
-        GET_ALL_OBSTACLES
+        GET_ALL_OBSTACLES,
+        ASK_ASSIST
     }
 
     private final String _serverURL = "https://roule-ma-poule.herokuapp.com/";
@@ -36,6 +37,7 @@ public class Communication {
     private final String _urlCreateEvent = "event/create";
     private final String _urlGetEvents = "event/list/";
     private final String _urlGetObstacles = "obstacle/list/";
+    private final String _urlAskAssist = "assist/create/";
 
     private RequestType _currentRequestType;
     private static String _token;
@@ -123,6 +125,9 @@ public class Communication {
                 case GET_ALL_OBSTACLES:
                     communicate(infoEvents[0], infoEvents[1], _urlGetObstacles);
                     break;
+                case ASK_ASSIST:
+                    communicate(infoEvents[0], infoEvents[1], _urlAskAssist);
+                    break;
                 default:
                     break;
             }
@@ -164,6 +169,28 @@ public class Communication {
             }
             else if (url.equals(_urlGetObstacles)){
                 _JSONObstacles = sendGetArray( url+_token+"/"+latitude+"/"+longitude);
+            }
+            else if (url.equals(_urlAskAssist)){
+                JSONObject jsonObj = new JSONObject();
+
+                try {
+                    jsonObj.put("token", _token);
+                    jsonObj.put("utilisateur_id_2","4");
+                    jsonObj.put("assistance_longitude",longitude);
+                    jsonObj.put("assistance_latitude",latitude);
+                    jsonObj.put("utilisateur_id", "4");
+
+                    String res = sendPost(jsonObj, _urlAskAssist).toString();
+
+                    Log.d("res",res);
+
+                    if (res.equals("OK")){
+                        registerSucceded = true;
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
 
         } catch (Exception e) {
