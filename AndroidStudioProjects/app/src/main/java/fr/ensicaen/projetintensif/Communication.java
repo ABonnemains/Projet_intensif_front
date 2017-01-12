@@ -43,7 +43,7 @@ public class Communication {
     private Object[] infoGetEvent;
 
     // Constructeur pour register
-    public Communication(String login, String pw, String pwConfirm, String name, String surname, String phoneNumber, Timestamp birthDate){
+    public Communication(String login, String pw, String pwConfirm, String name, String surname, String phoneNumber, long birthDate){
         infoRegister = new Object[]{login, pw, pwConfirm, name, surname,phoneNumber,birthDate};
         _currentRequestType = RequestType.REGISTER;
     }
@@ -58,7 +58,7 @@ public class Communication {
     }
 
     //Constructeur pour create event
-    public Communication(String name, String longitude, String latitude, Timestamp timeStamp, String description){
+    public Communication(String name, String longitude, String latitude, long timeStamp, String description){
         infoGetEvent = new Object[]{name,longitude,latitude,timeStamp,description};
         _currentRequestType = RequestType.GET_EVENT;
     }
@@ -83,13 +83,13 @@ public class Communication {
                     communicate(infoLogin[0], infoLogin[1]);
                     break;
                 case REGISTER:
-                    communicate((String)infoRegister[0],(String)infoRegister[1],(String)infoRegister[2],(String)infoRegister[3],(String)infoRegister[4],(String)infoRegister[5],(Timestamp)infoRegister[6]);
+                    communicate((String)infoRegister[0],(String)infoRegister[1],(String)infoRegister[2],(String)infoRegister[3],(String)infoRegister[4],(String)infoRegister[5],(long)infoRegister[6]);
                     break;
                 case SEARCH_USER:
                     communicate(infoSearchUser);
                     break;
                 case GET_EVENT:
-                    communicate((String)infoGetEvent[0], (String)infoGetEvent[1], (String)infoGetEvent[2], (Timestamp)infoGetEvent[3], (String)infoGetEvent[4]);
+                    communicate((String)infoGetEvent[0], (String)infoGetEvent[1], (String)infoGetEvent[2], (long)infoGetEvent[3], (String)infoGetEvent[4]);
                     break;
                 default:
                     break;
@@ -123,7 +123,7 @@ public class Communication {
         }
     }
 
-    private void communicate(String login, String pw, String pwConfirm, String name, String surname, String phoneNumber, Timestamp birthDate){
+    private void communicate(String login, String pw, String pwConfirm, String name, String surname, String phoneNumber, long birthDate){
         JSONObject jsonObj = new JSONObject();
 
         try {
@@ -148,7 +148,7 @@ public class Communication {
         }
     }
 
-    private void communicate(String name, String longitude, String latitude, Timestamp timeStamp, String description){
+    private void communicate(String name, String longitude, String latitude, long timeStamp, String description){
         JSONObject jsonObj = new JSONObject();
 
         try {
