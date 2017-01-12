@@ -1,6 +1,7 @@
 package fr.ensicaen.projetintensif;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
@@ -13,6 +14,12 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 import static android.view.KeyEvent.ACTION_DOWN;
 import static android.view.KeyEvent.KEYCODE_ENTER;
@@ -35,6 +42,7 @@ public class SignupActivity extends AppCompatActivity {
     private CheckBox _terms_and_conditions_checkbox;
     private Button _validate;
     private TextView _link_login;
+    private boolean registerSuccessful = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -158,6 +166,7 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     public void signup() {
+
         if (!validEntry()) {
             onSignupFailed();
             return;
@@ -175,25 +184,47 @@ public class SignupActivity extends AppCompatActivity {
         String sir_name = _sir_name.getText().toString();
         String nickname = _nickname.getText().toString();
         String password = _password.getText().toString();
-        String birth_date = _birth_date.getText().toString();
+        String confirmPassword = _confirm_password.getText().toString();
+
+        long lTimestamp = 0;
+
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            Date parsedDate = dateFormat.parse(_birth_date.getText().toString());
+
+            Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
+            lTimestamp = timestamp.getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         String phone = _phone.getText().toString();
 
         // process of signup
+        new SignupTask(this).execute(new Communication(nickname, password, confirmPassword, name, sir_name, phone, lTimestamp));
 
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
-                        onSignupSuccess();
+                        if(registerSuccessful){
+                            onSignupSuccess();
+                        }
+                        else{
+                            onSignupFailed();
+                        }
                         progressDialog.dismiss();
                     }
-                }, 3000);
+                }, 10000);
+
     }
 
 
     public void onSignupSuccess() {
         _validate.setEnabled(true);
         setResult(RESULT_OK, null);
-        finish();
+        Intent intent = new Intent(getBaseContext(),LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        getBaseContext().startActivity(intent);
     }
 
     public void onSignupFailed() {
@@ -211,7 +242,10 @@ public class SignupActivity extends AppCompatActivity {
         String confirm_password = _confirm_password.getText().toString();
         String birth_date = _birth_date.getText().toString();
         String phone = _phone.getText().toString();
-        boolean terms_and_conditions_accepted = _terms_and_conditions_checkbox.isChecked();
+
+        //@TODO remettre la verification des conditions d'utilisations
+        boolean terms_and_conditions_accepted = true;//_terms_and_conditions_checkbox.isChecked();
+
 
         // add other checks
         if (name.isEmpty()) {
@@ -275,13 +309,18 @@ public class SignupActivity extends AppCompatActivity {
         }
 
         // add other checks
-        if (terms_and_conditions_accepted) {
+        //@TODO remettre verification checkbox
+        /*if (terms_and_conditions_accepted) {
             _terms_and_conditions_checkbox.setError("Champ obligatoire.");
             valid = false;
         } else {
             _terms_and_conditions_checkbox.setError(null);
-        }
+        }*/
 
         return valid;
+    }
+
+    public void setRegisterSucces(boolean registerSucceded) {
+        registerSuccessful = registerSucceded;
     }
 }

@@ -19,6 +19,7 @@ import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.ItemizedIconOverlay;
 import org.osmdroid.views.overlay.MapEventsOverlay;
+import org.osmdroid.views.overlay.Marker;
 import org.osmdroid.views.overlay.Overlay;
 import org.osmdroid.views.overlay.OverlayItem;
 
@@ -66,27 +67,6 @@ public class MapOverlay {
         mapView.getOverlays().add(currentLocationOverlay);
     }
 
-    public void addOverlayAlert(final IGeoPoint point, final String description){
-        OverlayItem myLocationOverlayItem = new OverlayItem("Here", "Current Position", point);
-        myLocationOverlayItem.setMarker(ContextCompat.getDrawable(context,R.drawable.person));
-
-        final ArrayList<OverlayItem> items = new ArrayList<>();
-        items.add(myLocationOverlayItem);
-
-        ItemizedIconOverlay currentLocationOverlay = new ItemizedIconOverlay<>(items,
-                new ItemizedIconOverlay.OnItemGestureListener<OverlayItem>() {
-                    public boolean onItemSingleTapUp(final int index, final OverlayItem item) {
-                        Toast toast = Toast.makeText(context, description, Toast.LENGTH_SHORT);
-                        toast.show();
-                        return true;
-                    }
-                    public boolean onItemLongPress(final int index, final OverlayItem item) {
-                        return true;
-                    }
-                }, context);
-        mapView.getOverlays().add(currentLocationOverlay);
-    }
-
     public void addEventReceiver() {
         MapEventsReceiver mReceive = new MapEventsReceiver() {
             @Override
@@ -104,9 +84,14 @@ public class MapOverlay {
                 alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         final String description = editText.getText().toString();
-                        Toast toast = Toast.makeText(context, description, Toast.LENGTH_SHORT);
-                        toast.show();
-                        addOverlayAlert(p, description);
+                        Marker mPin = new Marker(mapView);
+                        mPin.setPosition(p);
+                        mPin.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+                        mPin.setTitle(description);
+                        Bitmap bitmap = BitmapFactory.decodeResource(activity.getResources(), R.drawable.person);
+                        Drawable drawable = new BitmapDrawable(activity.getResources(), bitmap);
+                        mPin.setIcon(drawable);
+                        mapView.getOverlays().add(mPin);
                     }
                 });
 

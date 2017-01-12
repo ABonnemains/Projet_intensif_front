@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.URL;
+import java.sql.Timestamp;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -18,7 +19,8 @@ public class Communication {
     public enum RequestType{
         LOGIN,
         REGISTER,
-        SEARCH_USER
+        SEARCH_USER,
+        GET_EVENT
     }
 
     private final String _serverURL = "https://roule-ma-poule.herokuapp.com/";
@@ -26,19 +28,46 @@ public class Communication {
     private final String _urlLogin = "authentication/login";
     private final String _urlRegister = "authentication/register";
     private final  String _urlGetProfile = "authentication/profile/";
+    private final String _urlCreateEvent = "event/create";
 
     private RequestType _currentRequestType;
     private static String _token;
     private JSONObject _getRes;
 
+    private boolean registerSucceded = false;
+
     private String[] infoLogin;
+
+    private Object[] infoRegister;
+
+    private Object[] infoGetEvent;
+
+    // Constructeur pour register
+    public Communication(String login, String pw, String pwConfirm, String name, String surname, String phoneNumber, long birthDate){
+        infoRegister = new Object[]{login, pw, pwConfirm, name, surname,phoneNumber,birthDate};
+        _currentRequestType = RequestType.REGISTER;
+    }
+
     private String infoSearchUser;
 
+    // Constructeur pour login
     public Communication(String login, String pw)
     {
         infoLogin = new String[]{login, pw};
         _currentRequestType = RequestType.LOGIN;
     }
+
+    //Constructeur pour create event
+    public Communication(String name, String longitude, String latitude, long timeStamp, String description){
+        infoGetEvent = new Object[]{name,longitude,latitude,timeStamp,description};
+        _currentRequestType = RequestType.GET_EVENT;
+    }
+
+
+    public boolean getRegisterSucceded() {
+        return registerSucceded;
+    }
+
 
     public Communication(String userSearch)
     {
@@ -54,11 +83,14 @@ public class Communication {
                     communicate(infoLogin[0], infoLogin[1]);
                     break;
                 case REGISTER:
+                    communicate((String)infoRegister[0],(String)infoRegister[1],(String)infoRegister[2],(String)infoRegister[3],(String)infoRegister[4],(String)infoRegister[5],(long)infoRegister[6]);
                     break;
                 case SEARCH_USER:
                     communicate(infoSearchUser);
                     break;
-
+                case GET_EVENT:
+                    communicate((String)infoGetEvent[0], (String)infoGetEvent[1], (String)infoGetEvent[2], (long)infoGetEvent[3], (String)infoGetEvent[4]);
+                    break;
                 default:
                     break;
             }
@@ -75,7 +107,7 @@ public class Communication {
             jsonObj.put("login", login);
             jsonObj.put("password",pwd);
 
-            _token = sendPost(jsonObj, _urlLogin).getString("token");
+            _token = sendPost(jsonObj, _urlLogin).split("\"")[3];
             Log.d("Login : ", _token);
 
         } catch (Exception e) {
@@ -91,6 +123,56 @@ public class Communication {
         }
     }
 
+    private void communicate(String login, String pw, String pwConfirm, String name, String surname, String phoneNumber, long birthDate){
+        JSONObject jsonObj = new JSONObject();
+
+        try {
+            jsonObj.put("login", login);
+            jsonObj.put("password",pw);
+            jsonObj.put("password_confirmation",pwConfirm);
+            jsonObj.put("user_name",name);
+            jsonObj.put("user_surname",surname);
+            jsonObj.put("user_phone",phoneNumber);
+            jsonObj.put("user_birthdate",birthDate);
+
+            String res = sendPost(jsonObj, _urlRegister).toString();
+
+            Log.d("res",res);
+
+            if (res.equals("OK")){
+                registerSucceded = true;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void communicate(String name, String longitude, String latitude, long timeStamp, String description){
+        JSONObject jsonObj = new JSONObject();
+
+        try {
+            jsonObj.put("token", _token);
+            jsonObj.put("event_name",name);
+            jsonObj.put("event_longitude",longitude);
+            jsonObj.put("event_latitude",latitude);
+            jsonObj.put("event_timestamp",timeStamp);
+            jsonObj.put("event_description",description);
+
+
+            String res = sendPost(jsonObj, _urlCreateEvent);
+
+            Log.d("res",res);
+
+            if (res.equals("OK")){
+                registerSucceded = true;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public String getToken()
     {
         return _token;
@@ -100,7 +182,7 @@ public class Communication {
         return _getRes;
     }
 
-    private JSONObject sendPost(JSONObject jsonObject, String urlPost)throws Exception{
+    private String sendPost(JSONObject jsonObject, String urlPost)throws Exception{
         URL obj = new URL(_serverURL+urlPost);
 
         HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
@@ -119,11 +201,13 @@ public class Communication {
 
         int responseCode = con.getResponseCode();
 
-        Log.d("POST : url ",  _serverURL + _urlLogin);
-        Log.d("POST : jsonObject ", jsonObject.toString());
-        Log.d("POST : Response Code ", responseCode + "");
 
-        if (responseCode == 401 || responseCode == 404)
+        Log.d("POST : url : ",  _serverURL + urlPost);
+        Log.d("POST : jsonObject : ", jsonObject.toString());
+        Log.d("POST : Response Code : ", responseCode + "");
+
+
+        if (responseCode != 200)
         {
             return null;
         }
@@ -139,9 +223,7 @@ public class Communication {
 
         Log.d("POST : Response ", response.toString());
 
-        JSONObject res = new JSONObject(response.toString());
-
-        return res;
+        return response.toString();
     }
 
     private JSONObject sendGet(String urlGet) throws Exception {
@@ -152,8 +234,10 @@ public class Communication {
 
         int responseCode = con.getResponseCode();
 
+
         Log.d("GET : url ",  _serverURL + urlGet);
         Log.d("GET : Response Code ", responseCode + "");
+
 
         BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
         String inputLine;
