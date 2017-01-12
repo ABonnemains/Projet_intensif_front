@@ -111,7 +111,7 @@ public class LoginActivity extends AppCompatActivity {
                         }
                         progressDialog.dismiss();
                     }
-                }, 10000);
+                }, 20000);
 
         _login_button.setEnabled(true);
     }

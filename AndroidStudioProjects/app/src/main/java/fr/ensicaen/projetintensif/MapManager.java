@@ -13,7 +13,6 @@ import org.osmdroid.config.Configuration;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
-import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider;
 
 import java.util.List;
 
@@ -46,6 +45,10 @@ public class MapManager {
             currentLocation.setLatitude(48.8583);
             currentLocation.setLongitude(2.2944);
         }
+        MapOverlay mapOverlay = new MapOverlay(_activity, _ctx, map);
+        mapOverlay.addOverlayPosition(new GeoPoint(currentLocation.getLatitude(), currentLocation.getLongitude()));
+        mapOverlay.addEventReceiver();
+        mapOverlay.removeEventReceiver();
 
         IMapController mapController = map.getController();
         mapController.setZoom(14);

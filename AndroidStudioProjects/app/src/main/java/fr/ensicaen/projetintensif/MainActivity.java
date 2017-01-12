@@ -1,15 +1,22 @@
 package fr.ensicaen.projetintensif;
 
 import android.app.FragmentManager;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.TaskStackBuilder;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,6 +24,7 @@ import android.view.View;
 
 import org.json.JSONObject;
 import org.osmdroid.config.Configuration;
+import org.osmdroid.views.MapView;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -31,12 +39,53 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton fabDanger = (FloatingActionButton) findViewById(R.id.fabDanger);
+
+        MapView map = (MapView) findViewById(R.id.map);
+        final MapOverlay mapOverlay = new MapOverlay(this, getApplicationContext(), map);
+
+        fabDanger.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Création d'événement ?", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Assistance", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+
+                NotificationCompat.Builder mBuilder =
+                        new NotificationCompat.Builder(getApplication())
+                                .setContentTitle("Un utilisateur a besoin d'assistance.")
+                                .setSmallIcon(R.drawable.alerte)
+                                .setContentText("A l'aide.");
+                Intent resultIntent = new Intent(getApplication(), LoginActivity.class);
+                TaskStackBuilder stackBuilder = TaskStackBuilder.create(getApplication());
+                stackBuilder.addParentStack(LoginActivity.class);
+                stackBuilder.addNextIntent(resultIntent);
+                PendingIntent resultPendingIntent =
+                        stackBuilder.getPendingIntent(
+                                0,
+                                PendingIntent.FLAG_UPDATE_CURRENT
+                        );
+                mBuilder.setContentIntent(resultPendingIntent);
+                NotificationManager mNotificationManager =
+                        (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                mNotificationManager.notify(1, mBuilder.build());
+            }
+        });
+
+        FloatingActionButton fabAssistance = (FloatingActionButton) findViewById(R.id.fabAssistance);
+        fabAssistance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Danger", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                mapOverlay.addEventReceiver();
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mapOverlay.removeEventReceiver();
+                    }
+                }, 10000);
+
             }
         });
 
@@ -96,18 +145,7 @@ public class MainActivity extends AppCompatActivity
 
 
         if (id == R.id.evenement) {
-            /*String eventCreated = "eventCreated";
-            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-            CreateEvent createEvent = new CreateEvent();
-            if(null == getFragmentManager().findFragmentByTag(eventCreated)){
-                fragmentTransaction.add(R.id.content_main, createEvent, eventCreated);
-                fragmentTransaction.addToBackStack("tag").commit();
-            }*/
-            /*Fragment frag = new CreateEvent();
-            android.app.FragmentManager fm = getFragmentManager();
-            fm.beginTransaction().replace(R.id.blank_fragment,frag).commit();*/
-
-            FragmentManager fm = getFragmentManager();
+             FragmentManager fm = getFragmentManager();
             CreateEvent ce = new CreateEvent();
             ce.show(fm,"Créer un évènement");
 
@@ -116,6 +154,10 @@ public class MainActivity extends AppCompatActivity
             /*Fragment frag = new BlankFragment();
             FragmentManager ft = getSupportFragmentManager();
             ft.beginTransaction().replace(R.id.hello,frag).commit();*/
+        } else if (id == R.id.recherche){
+            FragmentManager fm = getFragmentManager();
+            Recherche rechercheFragment = new Recherche();
+            rechercheFragment.show(fm,"Recherche");
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
