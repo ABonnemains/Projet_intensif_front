@@ -43,7 +43,7 @@ public class TravelTask {
         isEndPointOn = false;
         mPin = new Marker(mapView);
         mPin.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
-        mPin.setTitle("GO");
+        mPin.setTitle("Arrivée");
         Bitmap bitmap = BitmapFactory.decodeResource(activity.getResources(), R.drawable.picto_lieux_rouge_f);
         Double height = bitmap.getHeight()*0.03;
         Double width = bitmap.getWidth()*0.03;

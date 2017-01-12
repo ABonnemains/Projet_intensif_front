@@ -1,16 +1,22 @@
 package fr.ensicaen.projetintensif;
 
+import android.Manifest;
 import android.app.FragmentManager;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -27,20 +33,25 @@ import org.json.JSONObject;
 import org.osmdroid.bonuspack.routing.Road;
 import org.osmdroid.bonuspack.routing.RoadManager;
 import org.osmdroid.config.Configuration;
+import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
+import org.osmdroid.views.overlay.Marker;
 import org.osmdroid.views.overlay.Polyline;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, LocationListener {
 
     private JSONObject getResult;
     private int getID = 0;
     private MapManager mapManager;
     private Road roadResult;
     private ArrayList<Polyline> roadOverlays;
+    private Marker startMarker;
+    private MapView map;
+    private Location currentLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +62,7 @@ public class MainActivity extends AppCompatActivity
 
         FloatingActionButton fabDanger = (FloatingActionButton) findViewById(R.id.fabDanger);
 
-        MapView map = (MapView) findViewById(R.id.map);
+        map = (MapView) findViewById(R.id.map);
         final MapOverlay mapOverlay = new MapOverlay(this, getApplicationContext(), map);
 
         fabDanger.setOnClickListener(new View.OnClickListener() {
@@ -128,9 +139,8 @@ public class MainActivity extends AppCompatActivity
             }
         });
         String nickname = getIntent().getStringExtra("nickname");
-        if(!nickname.isEmpty())
+        if (!nickname.isEmpty())
             nickname_view.setText(nickname);
-
 
         //new GetTask(this).execute(new Communication("test"));
     }
@@ -212,5 +222,25 @@ public class MainActivity extends AppCompatActivity
         MapView map = (MapView) findViewById(R.id.map);
         map.getOverlays().add(roadOverlays.get(roadOverlays.size()-1));
         map.invalidate();
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        mapManager.setLocation(location);
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+
     }
 }
