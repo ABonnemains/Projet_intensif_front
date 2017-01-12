@@ -6,11 +6,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.sql.Timestamp;
 
@@ -20,26 +18,33 @@ public class Communication {
 
     public enum RequestType{
         LOGIN,
-        REGISTER
+        REGISTER,
+        SEARCH_USER
     }
 
     private final String _serverURL = "https://roule-ma-poule.herokuapp.com/";
     //private final String _serverURL = "https://secure-lake-76948.herokuapp.com/";
     private final String _urlLogin = "authentication/login";
     private final String _urlRegister = "authentication/register";
+    private final  String _urlGetProfile = "authentication/profile/";
 
     private RequestType _currentRequestType;
     private static String _token;
+    private JSONObject _getRes;
 
     private boolean registerSucceded = false;
 
     private String[] infoLogin;
+
     private Object[] infoRegister;
 
     public Communication(String login, String pw, String pwConfirm, String name, String surname, String phoneNumber, Timestamp birthDate){
         infoRegister = new Object[]{login, pw, pwConfirm, name, surname,phoneNumber,birthDate};
         _currentRequestType = RequestType.REGISTER;
     }
+
+    private String infoSearchUser;
+
 
     public Communication(String login, String pw)
     {
@@ -53,6 +58,12 @@ public class Communication {
     }
 
 
+    public Communication(String userSearch)
+    {
+        infoSearchUser = userSearch;
+        _currentRequestType = RequestType.SEARCH_USER;
+    }
+
     public void communicate(){
         try {
             switch (_currentRequestType)
@@ -62,6 +73,9 @@ public class Communication {
                     break;
                 case REGISTER:
                     communicate((String)infoRegister[0],(String)infoRegister[1],(String)infoRegister[2],(String)infoRegister[3],(String)infoRegister[4],(String)infoRegister[5],(Timestamp)infoRegister[6]);
+                    break;
+                case SEARCH_USER:
+                    communicate(infoSearchUser);
                     break;
                 default:
                     break;
@@ -80,7 +94,16 @@ public class Communication {
             jsonObj.put("password",pwd);
 
             _token = sendPost(jsonObj, _urlLogin);
+            Log.d("Login : ", _token);
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void communicate(String profileName){
+        try {
+            _getRes = sendGet(_urlGetProfile+_token+"/"+profileName);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -98,7 +121,7 @@ public class Communication {
             jsonObj.put("user_phone",phoneNumber);
             jsonObj.put("user_birthdate",birthDate);
 
-            String res = sendPost(jsonObj, _urlRegister);
+            String res = sendPost(jsonObj, _urlRegister).toString();
 
             Log.d("res",res);
 
@@ -116,8 +139,11 @@ public class Communication {
         return _token;
     }
 
-    private String sendPost(JSONObject jsonObject, String urlPost)throws Exception{
+    public JSONObject getGetResult(){
+        return _getRes;
+    }
 
+    private String sendPost(JSONObject jsonObject, String urlPost)throws Exception{
         URL obj = new URL(_serverURL+urlPost);
 
         HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
@@ -136,9 +162,11 @@ public class Communication {
 
         int responseCode = con.getResponseCode();
 
+
         Log.d("POST : url : ",  _serverURL + urlPost);
         Log.d("POST : jsonObject : ", jsonObject.toString());
         Log.d("POST : Response Code : ", responseCode + "");
+
 
         if (responseCode != 200)
         {
@@ -154,37 +182,23 @@ public class Communication {
         }
         in.close();
 
-        Log.d("POST : Response : ", response.toString());
+        Log.d("POST : Response ", response.toString());
 
         return response.toString();
     }
 
-
-    public void sendPost() throws Exception {
-
-        URL obj = new URL(_serverURL+_urlLogin);
+    private JSONObject sendGet(String urlGet) throws Exception {
+        URL obj = new URL(_serverURL+urlGet);
         HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
-
-        //add request header
-        con.setRequestMethod("POST");
-        con.setRequestProperty( "Content-type", "application/json");
+        con.setRequestMethod("GET");
         con.setRequestProperty( "Accept", "*/*" );
 
-        JSONObject jsonObj = new JSONObject();
-        jsonObj.put("login", "test");
-        jsonObj.put("password","test");
-
-        // Send post request
-        con.setDoOutput(true);
-
-        OutputStreamWriter wr = new OutputStreamWriter(con.getOutputStream());
-        wr.write(jsonObj.toString());
-        wr.flush();
-        wr.close();
-
         int responseCode = con.getResponseCode();
-        Log.d("Sending request to: ", "" + _serverURL + _urlLogin);
-        Log.d("Response Code : ", "" + responseCode);
+
+
+        Log.d("GET : url ",  _serverURL + urlGet);
+        Log.d("GET : Response Code ", responseCode + "");
+
 
         BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
         String inputLine;
@@ -195,7 +209,12 @@ public class Communication {
         }
         in.close();
 
-        //print result
-        System.out.println(response.toString());
+        Log.d("GET : Response ", response.toString());
+
+        JSONObject res = new JSONObject(response.toString());
+
+        return res;
     }
+
+
 }

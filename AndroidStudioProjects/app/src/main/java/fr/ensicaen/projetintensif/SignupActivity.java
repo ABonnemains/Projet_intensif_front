@@ -210,6 +210,7 @@ public class SignupActivity extends AppCompatActivity {
         _validate.setEnabled(true);
         setResult(RESULT_OK, null);
         Intent intent = new Intent(getBaseContext(),LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         getBaseContext().startActivity(intent);
     }
 
