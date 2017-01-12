@@ -31,6 +31,8 @@ import org.osmdroid.views.MapView;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    MapManager mapManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,8 +101,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
-        MapManager mapManager = new MapManager(this, getApplicationContext());
+        mapManager = new MapManager(this, getApplicationContext());
     }
 
     @Override
@@ -165,16 +166,17 @@ public class MainActivity extends AppCompatActivity
             FragmentManager ft = getSupportFragmentManager();
             ft.beginTransaction().replace(R.id.hello,frag).commit();*/
         } else if (id == R.id.recherche){
-            FragmentManager fm = getFragmentManager();
+            /*FragmentManager fm = getFragmentManager();
             Recherche rechercheFragment = new Recherche();
-            rechercheFragment.show(fm,"Recherche");
+            rechercheFragment.show(fm,"Recherche");*/
         }
-
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-    public getG
+
+    public MapManager getMapManager() {
+        return mapManager;
+    }
 }

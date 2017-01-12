@@ -3,6 +3,7 @@ package fr.ensicaen.projetintensif;
 import android.app.DialogFragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,8 +15,10 @@ import android.widget.Toast;
 import org.osmdroid.bonuspack.routing.OSRMRoadManager;
 import org.osmdroid.bonuspack.routing.Road;
 import org.osmdroid.bonuspack.routing.RoadManager;
+import org.osmdroid.bonuspack.routing.RoadNode;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
+import org.osmdroid.views.overlay.Marker;
 import org.osmdroid.views.overlay.Polyline;
 
 import java.util.ArrayList;
@@ -59,6 +62,16 @@ public class Recherche extends DialogFragment {
 
                                 MapView map = (MapView) ((MainActivity) getActivity()).findViewById(R.id.map);
                                 map.getOverlays().add(roadOverlay);
+
+                                Drawable nodeIcon = getResources().getDrawable(R.drawable.marker_node);
+                                for (int i=0; i<road.mNodes.size(); i++){
+                                    RoadNode node = road.mNodes.get(i);
+                                    Marker nodeMarker = new Marker(map);
+                                    nodeMarker.setPosition(node.mLocation);
+                                    nodeMarker.setIcon(nodeIcon);
+                                    nodeMarker.setTitle("Step "+i);
+                                    map.getOverlays().add(nodeMarker);
+                                }
 
                                 map.invalidate();
                                 progressDialog.dismiss();
