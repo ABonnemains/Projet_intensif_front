@@ -25,14 +25,19 @@ import android.view.View;
 import android.widget.TextView;
 
 import org.json.JSONObject;
+import org.osmdroid.bonuspack.routing.Road;
+import org.osmdroid.bonuspack.routing.RoadManager;
 import org.osmdroid.config.Configuration;
 import org.osmdroid.views.MapView;
+import org.osmdroid.views.overlay.Polyline;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private JSONObject getResult;
     private int getID = 0;
+    private MapManager mapManager;
+    private Road roadResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +96,13 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        mapManager = new MapManager(this, getApplicationContext());
+
+        final TravelTask travelTask = new TravelTask(this, getApplicationContext(), map);
+        travelTask.addEventReceiver();
+
+
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -117,10 +129,11 @@ public class MainActivity extends AppCompatActivity
             nickname_view.setText(nickname);
 
 
-        MapManager mapManager = new MapManager(this, getApplicationContext());
 
+        MapManager mapManager = new MapManager(this, getApplicationContext());
         Location location = mapManager.getLocation();
         getEvenements(location.getLatitude(),location.getLongitude());
+        getObstacles(location.getLatitude(),location.getLongitude());
 
         //new GetTask(this).execute(new Communication("test"));
     }
@@ -176,9 +189,9 @@ public class MainActivity extends AppCompatActivity
             FragmentManager ft = getSupportFragmentManager();
             ft.beginTransaction().replace(R.id.hello,frag).commit();*/
         } else if (id == R.id.recherche){
-            FragmentManager fm = getFragmentManager();
-            Recherche rechercheFragment = new Recherche();
-            rechercheFragment.show(fm,"Recherche");
+            /*FragmentManager fm = getFragmentManager();
+            Recherche searchTaskFragment = new SearchTask();
+            searchTaskFragment.show(fm,"Recherche");*/
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -191,7 +204,24 @@ public class MainActivity extends AppCompatActivity
         getID++;
     }
 
-    public void getEvenements(double latitude, double longitude){
-        new GetTask((MainActivity)this).execute(new Communication(latitude,longitude));
+
+    public void getEvenements(double latitude, double longitude) {
+        new GetTask((MainActivity) this).execute(new Communication(latitude, longitude, Communication.RequestType.GET_ALL_EVENTS));
+    }
+
+    public void getObstacles(double latitude, double longitude){
+        new GetTask((MainActivity) this).execute(new Communication(latitude, longitude, Communication.RequestType.GET_ALL_OBSTACLES));
+    }
+
+    public MapManager getMapManager() {
+        return mapManager;
+    }
+
+    public void getRoadResult(Road road){
+        Polyline roadOverlay = RoadManager.buildRoadOverlay(road);
+
+        MapView map = (MapView) findViewById(R.id.map);
+        map.getOverlays().add(roadOverlay);
+        map.invalidate();
     }
 }

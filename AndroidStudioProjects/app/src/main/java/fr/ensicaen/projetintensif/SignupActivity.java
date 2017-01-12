@@ -16,6 +16,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 import static android.view.KeyEvent.ACTION_DOWN;
@@ -182,13 +185,23 @@ public class SignupActivity extends AppCompatActivity {
         String nickname = _nickname.getText().toString();
         String password = _password.getText().toString();
         String confirmPassword = _confirm_password.getText().toString();
-        long birth_date = Long.parseLong(_birth_date.getText().toString());
-        Timestamp birthTimestamp = new Timestamp(birth_date);
+
+        long lTimestamp = 0;
+
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            Date parsedDate = dateFormat.parse(_birth_date.getText().toString());
+
+            Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
+            lTimestamp = timestamp.getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         String phone = _phone.getText().toString();
 
         // process of signup
-
-        new SignupTask(this).execute(new Communication(nickname, password, confirmPassword, name, sir_name, phone, birthTimestamp));
+        new SignupTask(this).execute(new Communication(nickname, password, confirmPassword, name, sir_name, phone, lTimestamp));
 
         new android.os.Handler().postDelayed(
                 new Runnable() {
