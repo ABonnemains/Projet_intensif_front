@@ -2,11 +2,11 @@ package fr.ensicaen.projetintensif;
 
 import android.os.AsyncTask;
 
-public class LoginTask extends AsyncTask<Communication,Void,Communication> {
+public class SignupTask extends AsyncTask<Communication,Void,Communication> {
 
-    private LoginActivity activity;
+    private SignupActivity activity;
 
-    public LoginTask(LoginActivity monActivity){this.activity = monActivity;}
+    public SignupTask(SignupActivity monActivity){this.activity = monActivity;}
 
     protected Communication doInBackground(Communication... handler){
         handler[0].communicate();
@@ -15,6 +15,6 @@ public class LoginTask extends AsyncTask<Communication,Void,Communication> {
 
     protected void onPostExecute(Communication handler)
     {
-        activity.setLoginSuccess(handler.getToken());
+        activity.setRegisterSucces(handler.getRegisterSucceded());
     }
 }

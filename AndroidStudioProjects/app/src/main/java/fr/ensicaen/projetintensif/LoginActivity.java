@@ -35,6 +35,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         _nickname = (EditText) findViewById(R.id.input_login_nickname);
+        _nickname.requestFocus();
         _nickname.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -127,6 +128,7 @@ public class LoginActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 // response of successfull signup, currently finish the activity and launch the main activity
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.putExtra("nickname", _nickname.getText().toString());
                 startActivity(intent);
                 this.finish();
             }
@@ -141,6 +143,7 @@ public class LoginActivity extends AppCompatActivity {
     public void onLoginSuccess() {
         _login_button.setEnabled(true);
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        intent.putExtra("nickname", _nickname.getText().toString());
         startActivity(intent);
         finish();
     }
