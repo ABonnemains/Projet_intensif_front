@@ -1,21 +1,18 @@
 package fr.ensicaen.projetintensif;
 
-import android.Manifest;
 import android.app.FragmentManager;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
-import android.location.LocationManagerimport android.os.Bundle;
+import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -33,13 +30,11 @@ import org.json.JSONObject;
 import org.osmdroid.bonuspack.routing.Road;
 import org.osmdroid.bonuspack.routing.RoadManager;
 import org.osmdroid.config.Configuration;
-import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.Marker;
 import org.osmdroid.views.overlay.Polyline;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, LocationListener {
@@ -142,7 +137,6 @@ public class MainActivity extends AppCompatActivity
         if (!nickname.isEmpty())
             nickname_view.setText(nickname);
 
-        MapManager mapManager = new MapManager(this, getApplicationContext());
         Location location = mapManager.getLocation();
         getEvenements(location.getLatitude(), location.getLongitude());
         getObstacles(location.getLatitude(), location.getLongitude());

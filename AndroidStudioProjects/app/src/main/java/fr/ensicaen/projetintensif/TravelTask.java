@@ -43,7 +43,7 @@ public class TravelTask {
         isEndPointOn = false;
         mPin = new Marker(mapView);
         mPin.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
-        mPin.setTitle("Arrivée");
+        mPin.setTitle("ArrivÃ©e");
         Bitmap bitmap = BitmapFactory.decodeResource(activity.getResources(), R.drawable.arrivee);
         Drawable drawable = new BitmapDrawable(activity.getResources(), bitmap);
         mPin.setIcon(drawable);

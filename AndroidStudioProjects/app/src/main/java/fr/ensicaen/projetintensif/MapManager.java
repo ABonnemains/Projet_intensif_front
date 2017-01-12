@@ -83,7 +83,7 @@ public class MapManager {
         startMarker = new Marker(map);
         startMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
         startMarker.setTitle("Vous");
-        Bitmap bitmap = BitmapFactory.decodeResource(_activity.getResources(), R.drawable.picto_lieux_rouge);
+        Bitmap bitmap = BitmapFactory.decodeResource(_activity.getResources(), R.drawable.my_position);
         Double height = bitmap.getHeight()*0.03;
         Double width = bitmap.getWidth()*0.03;
         bitmap = Bitmap.createScaledBitmap(bitmap, width.intValue(), height.intValue(), false);
