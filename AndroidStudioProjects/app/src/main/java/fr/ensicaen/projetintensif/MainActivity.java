@@ -1,5 +1,6 @@
 package fr.ensicaen.projetintensif;
 
+import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -116,6 +117,7 @@ public class MainActivity extends AppCompatActivity
         getObstacles(location.getLatitude(),location.getLongitude());
 
         new GetTask(this).execute(new Communication("test"));
+        new RefreshHelpTask(this).execute(new Communication(location.getLatitude(),location.getLongitude(),Communication.RequestType.REFRESH_ASSIST));
 
         fabDanger.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -239,5 +241,20 @@ public class MainActivity extends AppCompatActivity
         MapView map = (MapView) findViewById(R.id.map);
         map.getOverlays().add(roadOverlays.get(roadOverlays.size()-1));
         map.invalidate();
+    }
+
+    public void notifSomeoneAskedHelp(){
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplication())
+                                .setContentTitle("Un utilisateur est en difficulté.")
+                                .setSmallIcon(R.drawable.alerte)
+                                .setContentText("Proposez votre aide.");
+        Intent resultIntent = new Intent(getApplication(), LoginActivity.class);
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(getApplication());
+        stackBuilder.addParentStack(LoginActivity.class);
+        stackBuilder.addNextIntent(resultIntent);
+        PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+        mBuilder.setContentIntent(resultPendingIntent);
+        NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        mNotificationManager.notify(1, mBuilder.build());
     }
 }

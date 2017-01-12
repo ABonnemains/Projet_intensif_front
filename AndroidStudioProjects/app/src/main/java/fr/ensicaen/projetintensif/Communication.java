@@ -25,7 +25,8 @@ public class Communication {
         GET_EVENT,
         GET_ALL_EVENTS,
         GET_ALL_OBSTACLES,
-        ASK_ASSIST
+        ASK_ASSIST,
+        REFRESH_ASSIST
     }
 
     private final String _serverURL = "https://roule-ma-poule.herokuapp.com/";
@@ -38,12 +39,14 @@ public class Communication {
     private final String _urlGetEvents = "event/list/";
     private final String _urlGetObstacles = "obstacle/list/";
     private final String _urlAskAssist = "assist/create/";
+    private final String _urlRefreshHelp = "assist/list/";
 
     private RequestType _currentRequestType;
     private static String _token;
     private JSONObject _getRes;
     private static JSONArray _JSONEvents;
     private static JSONArray _JSONObstacles;
+    private static JSONArray _JSONHelpNeeded;
 
     private boolean registerSucceded = false;
 
@@ -128,6 +131,9 @@ public class Communication {
                 case ASK_ASSIST:
                     communicate(infoEvents[0], infoEvents[1], _urlAskAssist);
                     break;
+                case REFRESH_ASSIST:
+                    communicate(infoEvents[0], infoEvents[1], _urlRefreshHelp);
+                    break;
                 default:
                     break;
             }
@@ -191,6 +197,9 @@ public class Communication {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+            }
+            else if (url.equals(_urlRefreshHelp)){
+                _JSONHelpNeeded = sendGetArray( url+_token+"/"+latitude+"/"+longitude);
             }
 
         } catch (Exception e) {
@@ -383,5 +392,10 @@ public class Communication {
         return res;
     }
 
-
+    public boolean doesSomeoneNeedHelp(){
+        if (_JSONHelpNeeded != null){
+            return _JSONHelpNeeded.length() != 0;
+        }
+        return false;
+    }
 }
