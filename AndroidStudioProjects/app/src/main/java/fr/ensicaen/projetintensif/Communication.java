@@ -2,6 +2,7 @@ package fr.ensicaen.projetintensif;
 
 import android.util.Log;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -20,7 +21,10 @@ public class Communication {
         LOGIN,
         REGISTER,
         SEARCH_USER,
-        GET_EVENT
+        OBSTACLE,
+        GET_EVENT,
+        GET_ALL_EVENTS,
+        GET_ALL_OBSTACLES
     }
 
     private final String _serverURL = "https://roule-ma-poule.herokuapp.com/";
@@ -28,19 +32,28 @@ public class Communication {
     private final String _urlLogin = "authentication/login";
     private final String _urlRegister = "authentication/register";
     private final  String _urlGetProfile = "authentication/profile/";
+    private final String _urlCreateObstacle = "obstacle/create";
     private final String _urlCreateEvent = "event/create";
+    private final String _urlGetEvents = "event/list/";
+    private final String _urlGetObstacles = "obstacle/list/";
 
     private RequestType _currentRequestType;
     private static String _token;
-    private JSONObject _getRes;
-
+    private static JSONObject _getRes;
+    private static JSONArray _JSONEvents;
+    private static JSONArray _JSONObstacles;
     private boolean registerSucceded = false;
 
     private String[] infoLogin;
+    private String[] infoObstacle;
 
     private Object[] infoRegister;
 
     private Object[] infoGetEvent;
+
+    private double[] infoEvents;
+
+
 
     // Constructeur pour register
     public Communication(String login, String pw, String pwConfirm, String name, String surname, String phoneNumber, long birthDate){
@@ -57,12 +70,21 @@ public class Communication {
         _currentRequestType = RequestType.LOGIN;
     }
 
+    public Communication(String description, String type, String longitude, String latitude){
+        infoObstacle = new String[]{description, type, longitude, latitude};
+        _currentRequestType = RequestType.OBSTACLE;
+    }
+
     //Constructeur pour create event
     public Communication(String name, String longitude, String latitude, long timeStamp, String description){
         infoGetEvent = new Object[]{name,longitude,latitude,timeStamp,description};
         _currentRequestType = RequestType.GET_EVENT;
     }
 
+    public Communication(double latitude, double longitude, RequestType type) {
+        infoEvents = new double[]{latitude ,longitude};
+        _currentRequestType = type;
+    }
 
     public boolean getRegisterSucceded() {
         return registerSucceded;
@@ -88,8 +110,17 @@ public class Communication {
                 case SEARCH_USER:
                     communicate(infoSearchUser);
                     break;
+                case OBSTACLE:
+                    communicate((String)infoObstacle[0], (String)infoObstacle[1], (String)infoObstacle[2], (String)infoObstacle[3]);
+                    break;
                 case GET_EVENT:
                     communicate((String)infoGetEvent[0], (String)infoGetEvent[1], (String)infoGetEvent[2], (long)infoGetEvent[3], (String)infoGetEvent[4]);
+                    break;
+                case GET_ALL_EVENTS:
+                    communicate(infoEvents[0], infoEvents[1], _urlGetEvents);
+                    break;
+                case GET_ALL_OBSTACLES:
+                    communicate(infoEvents[0], infoEvents[1], _urlGetObstacles);
                     break;
                 default:
                     break;
@@ -108,6 +139,7 @@ public class Communication {
             jsonObj.put("password",pwd);
 
             _token = sendPost(jsonObj, _urlLogin).split("\"")[3];
+
             Log.d("Login : ", _token);
 
         } catch (Exception e) {
@@ -123,6 +155,24 @@ public class Communication {
         }
     }
 
+
+    private void communicate(double latitude, double longitude, String url) {
+        try {
+            if (url.equals(_urlGetEvents)){
+                _JSONEvents = sendGetArray( url+_token+"/"+latitude+"/"+longitude);
+            }
+            else if (url.equals(_urlGetObstacles)){
+                _JSONObstacles = sendGetArray( url+_token+"/"+latitude+"/"+longitude);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Log.d("Login : ", _token);
+
+    }
+
+
     private void communicate(String login, String pw, String pwConfirm, String name, String surname, String phoneNumber, long birthDate){
         JSONObject jsonObj = new JSONObject();
 
@@ -135,7 +185,7 @@ public class Communication {
             jsonObj.put("user_phone",phoneNumber);
             jsonObj.put("user_birthdate",birthDate);
 
-            String res = sendPost(jsonObj, _urlRegister).toString();
+            String res = sendPost(jsonObj, _urlCreateObstacle).toString();
 
             Log.d("res",res);
 
@@ -147,6 +197,27 @@ public class Communication {
             e.printStackTrace();
         }
     }
+
+    private void communicate(String description, String type, String longitude, String latitude) {
+        JSONObject jsonObj = new JSONObject();
+
+        try {
+            jsonObj.put("token", _token);
+            jsonObj.put("description",description);
+            jsonObj.put("type",type);
+            jsonObj.put("longitude",longitude);
+            jsonObj.put("latitude",latitude);
+            jsonObj.put("utilisateur_id", "4");
+
+            String res = sendPost(jsonObj, _urlCreateObstacle).toString();
+
+            Log.d("res",res);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     private void communicate(String name, String longitude, String latitude, long timeStamp, String description){
         JSONObject jsonObj = new JSONObject();
@@ -255,5 +326,41 @@ public class Communication {
         return res;
     }
 
+    private JSONArray sendGetArray(String urlGet) throws Exception {
+        URL obj = new URL(_serverURL+urlGet);
+        HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
+        con.setRequestMethod("GET");
+        con.setRequestProperty( "Accept", "*/*" );
+
+        int responseCode = con.getResponseCode();
+
+
+        Log.d("GET : url ",  _serverURL + urlGet);
+        Log.d("GET : Response Code ", responseCode + "");
+
+
+        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+        String inputLine;
+        StringBuffer response = new StringBuffer();
+
+        while ((inputLine = in.readLine()) != null) {
+            response.append(inputLine);
+        }
+        in.close();
+
+        Log.d("GET : Response ", response.toString());
+
+        JSONArray res = new JSONArray(response.toString());
+
+        return res;
+    }
+
+    public static JSONArray get_JSONEvents() {
+        return _JSONEvents;
+    }
+
+    public static JSONArray get_JSONObstacles() {
+        return _JSONObstacles;
+    }
 
 }

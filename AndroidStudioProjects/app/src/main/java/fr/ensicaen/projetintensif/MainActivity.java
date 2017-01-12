@@ -9,8 +9,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
-import android.location.LocationManager;
-import android.os.Bundle;
+import android.location.LocationManagerimport android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
@@ -29,6 +28,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.osmdroid.bonuspack.routing.Road;
 import org.osmdroid.bonuspack.routing.RoadManager;
@@ -142,6 +142,20 @@ public class MainActivity extends AppCompatActivity
         if (!nickname.isEmpty())
             nickname_view.setText(nickname);
 
+        MapManager mapManager = new MapManager(this, getApplicationContext());
+        Location location = mapManager.getLocation();
+        getEvenements(location.getLatitude(), location.getLongitude());
+        getObstacles(location.getLatitude(), location.getLongitude());
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                JSONArray events = Communication.get_JSONEvents();
+                JSONArray obstacles = Communication.get_JSONObstacles();
+                mapOverlay.getDataFromServer(events, obstacles, null);
+            }
+        }, 15000);
         //new GetTask(this).execute(new Communication("test"));
     }
 
@@ -196,9 +210,9 @@ public class MainActivity extends AppCompatActivity
             FragmentManager ft = getSupportFragmentManager();
             ft.beginTransaction().replace(R.id.hello,frag).commit();*/
         } else if (id == R.id.recherche){
-            FragmentManager fm = getFragmentManager();
-            SearchTask searchTaskFragment = new SearchTask();
-            searchTaskFragment.show(fm,"Recherche");
+            /*FragmentManager fm = getFragmentManager();
+            Recherche searchTaskFragment = new SearchTask();
+            searchTaskFragment.show(fm,"Recherche");*/
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -209,6 +223,15 @@ public class MainActivity extends AppCompatActivity
     public void setGetResult(JSONObject res){
         getResult = res;
         getID++;
+    }
+
+
+    public void getEvenements(double latitude, double longitude) {
+        new GetTask((MainActivity) this).execute(new Communication(latitude, longitude, Communication.RequestType.GET_ALL_EVENTS));
+    }
+
+    public void getObstacles(double latitude, double longitude){
+        new GetTask((MainActivity) this).execute(new Communication(latitude, longitude, Communication.RequestType.GET_ALL_OBSTACLES));
     }
 
     public MapManager getMapManager() {

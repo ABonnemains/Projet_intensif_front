@@ -33,7 +33,7 @@ public class CreateEvent extends DialogFragment {
         String longitude = place.split(",")[0];
         String latitude = place.split(",")[1];
         try{
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
             Date parsedDate = dateFormat.parse(date);
             Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
             long lTimestanp = timestamp.getTime();
