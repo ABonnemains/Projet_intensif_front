@@ -221,7 +221,7 @@ public class Communication {
             jsonObj.put("user_phone",phoneNumber);
             jsonObj.put("user_birthdate",birthDate);
 
-            String res = sendPost(jsonObj, _urlCreateObstacle).toString();
+            String res = sendPost(jsonObj, _urlRegister).toString();
 
             Log.d("res",res);
 

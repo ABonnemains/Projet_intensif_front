@@ -3,7 +3,9 @@ package fr.ensicaen.projetintensif;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.DialogFragment;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,12 +17,26 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import org.osmdroid.util.GeoPoint;
+import org.osmdroid.views.MapView;
+
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
 public class CreateEvent extends DialogFragment {
+
+    private MapView map;
+    private MapOverlay mapOverlay;
+
+    public void setMap(MapView map){
+        this.map = map;
+    }
+
+    public void setMapOverlay(MapOverlay mapOverlay){
+        this.mapOverlay = mapOverlay;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,7 +54,9 @@ public class CreateEvent extends DialogFragment {
             Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
             long lTimestanp = timestamp.getTime();
             new GetTask((MainActivity)this.getActivity()).execute(new Communication(name,longitude,latitude, lTimestanp,description));
+
         }catch(Exception e){
+
         }
 
     }
@@ -74,7 +92,9 @@ public class CreateEvent extends DialogFragment {
                 }
 
                 getEvents(name,place,date,description,hour);
-
+                String longitude = place.split(",")[0];
+                String latitude = place.split(",")[1];
+                mapOverlay.addMarker(new GeoPoint(Double.parseDouble(longitude),Double.parseDouble(latitude) ), description, R.drawable.obstacle, 0.04);
 
             }
         });

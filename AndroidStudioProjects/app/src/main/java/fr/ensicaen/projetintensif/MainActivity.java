@@ -48,7 +48,8 @@ public class MainActivity extends AppCompatActivity
     public Location location;
     private Marker startMarker;
     private MapView map;
-    private Location currentLocation;
+    public Location currentLocation;
+    private MapOverlay mapOverlay;
 
 
     @Override
@@ -61,7 +62,7 @@ public class MainActivity extends AppCompatActivity
         FloatingActionButton fabDanger = (FloatingActionButton) findViewById(R.id.fabDanger);
 
         map = (MapView) findViewById(R.id.map);
-        final MapOverlay mapOverlay = new MapOverlay(this, getApplicationContext(), map);
+        mapOverlay = new MapOverlay(this, getApplicationContext(), map);
 
 
 
@@ -215,6 +216,8 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.evenement) {
              FragmentManager fm = getFragmentManager();
             CreateEvent ce = new CreateEvent();
+            ce.setMap(map);
+            ce.setMapOverlay(mapOverlay);
             ce.show(fm,"Créer un évènement");
 
 

@@ -113,8 +113,8 @@ public class MapOverlay {
                         mPin.setTitle(description);
                         Drawable drawable = resizeImage(R.drawable.obstacle, 0.04);
                         mPin.setIcon(drawable);
-                        mapView.getOverlays().add(mPin);
                         mapView.invalidate();
+                        mapView.getOverlays().add(mPin);
                     }
                 });
 
