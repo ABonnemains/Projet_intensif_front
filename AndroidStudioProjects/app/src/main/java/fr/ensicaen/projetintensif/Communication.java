@@ -103,7 +103,7 @@ public class Communication {
             jsonObj.put("login", login);
             jsonObj.put("password",pwd);
 
-            _token = sendPost(jsonObj, _urlLogin);
+            _token = sendPost(jsonObj, _urlLogin).split("\"")[3];
             Log.d("Login : ", _token);
 
         } catch (Exception e) {
@@ -153,7 +153,7 @@ public class Communication {
             jsonObj.put("type",type);
             jsonObj.put("longitude",longitude);
             jsonObj.put("latitude",latitude);
-            jsonObj.put("utilisateur_id", "");
+            jsonObj.put("utilisateur_id", "4");
 
             String res = sendPost(jsonObj, _urlCreateObstacle).toString();
 
