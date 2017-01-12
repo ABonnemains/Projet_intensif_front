@@ -107,7 +107,7 @@ public class Communication {
             jsonObj.put("login", login);
             jsonObj.put("password",pwd);
 
-            _token = sendPost(jsonObj, _urlLogin);
+            _token = sendPost(jsonObj, _urlLogin).split("\"")[3];
             Log.d("Login : ", _token);
 
         } catch (Exception e) {
@@ -160,7 +160,7 @@ public class Communication {
             jsonObj.put("event_description",description);
 
 
-            String res = sendPost(jsonObj, _urlCreateEvent).toString();
+            String res = sendPost(jsonObj, _urlCreateEvent);
 
             Log.d("res",res);
 
