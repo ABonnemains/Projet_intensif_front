@@ -230,6 +230,10 @@ public class MainActivity extends AppCompatActivity
         new GetTask((MainActivity) this).execute(new Communication(latitude, longitude, Communication.RequestType.ASK_ASSIST));
     }
 
+    public void refreshHelp(){
+        new RefreshHelpTask(this).execute(new Communication(location.getLatitude(),location.getLongitude(),Communication.RequestType.REFRESH_ASSIST));
+    }
+
     public MapManager getMapManager() {
         return mapManager;
     }
