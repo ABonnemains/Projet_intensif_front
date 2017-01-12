@@ -15,8 +15,10 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class CreateEvent extends DialogFragment {
 
@@ -25,6 +27,21 @@ public class CreateEvent extends DialogFragment {
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_create_event, container, false);
     }
+
+    //Heure non utilise par le serveur
+    public void getEvents(String name, String place, String date, String description, String hour){
+        String longitude = place.split(",")[0];
+        String latitude = place.split(",")[1];
+        try{
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            Date parsedDate = dateFormat.parse(date);
+            Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
+            new GetTask((MainActivity)this.getActivity()).execute(new Communication(name,longitude,latitude, timestamp,description));
+        }catch(Exception e){
+        }
+
+    }
+
 
     @Override
     public void onStart() {
@@ -40,19 +57,28 @@ public class CreateEvent extends DialogFragment {
                 String date = editTextDate.getText().toString();
                 EditText editTextDescription = (EditText) getView().findViewById(R.id.description);
                 String description = editTextDescription.getText().toString();
+                EditText editTextTime = (EditText) getView().findViewById(R.id.hour);
+                String hour = editTextDescription.getText().toString();
 
                 String text = name + " " + place + " " + date + " " + description;
 
                 Toast toast = Toast.makeText(getActivity().getApplicationContext(), text, Toast.LENGTH_SHORT);
                 toast.show();
+
                 if (!name.equals("") && !place.equals("") && !date.equals("") && !description.equals("")) {
                     dismiss();
                 } else {
                     Toast toastError = Toast.makeText(getActivity().getApplicationContext(), "Informations non complètes", Toast.LENGTH_SHORT);
                     toastError.show();
                 }
+
+                getEvents(name,place,date,description,hour);
+
+
             }
         });
+
+
 
         final EditText editTextDate = (EditText) getView().findViewById(R.id.date);
         editTextDate.setOnClickListener(new View.OnClickListener() {

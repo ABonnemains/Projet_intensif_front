@@ -19,7 +19,8 @@ public class Communication {
     public enum RequestType{
         LOGIN,
         REGISTER,
-        SEARCH_USER
+        SEARCH_USER,
+        GET_EVENT
     }
 
     private final String _serverURL = "https://roule-ma-poule.herokuapp.com/";
@@ -27,6 +28,7 @@ public class Communication {
     private final String _urlLogin = "authentication/login";
     private final String _urlRegister = "authentication/register";
     private final  String _urlGetProfile = "authentication/profile/";
+    private final String _urlCreateEvent = "event/create";
 
     private RequestType _currentRequestType;
     private static String _token;
@@ -38,6 +40,9 @@ public class Communication {
 
     private Object[] infoRegister;
 
+    private Object[] infoGetEvent;
+
+    // Constructeur pour register
     public Communication(String login, String pw, String pwConfirm, String name, String surname, String phoneNumber, Timestamp birthDate){
         infoRegister = new Object[]{login, pw, pwConfirm, name, surname,phoneNumber,birthDate};
         _currentRequestType = RequestType.REGISTER;
@@ -45,11 +50,17 @@ public class Communication {
 
     private String infoSearchUser;
 
-
+    // Constructeur pour login
     public Communication(String login, String pw)
     {
         infoLogin = new String[]{login, pw};
         _currentRequestType = RequestType.LOGIN;
+    }
+
+    //Constructeur pour create event
+    public Communication(String name, String longitude, String latitude, Timestamp timeStamp, String description){
+        infoGetEvent = new Object[]{name,longitude,latitude,timeStamp,description};
+        _currentRequestType = RequestType.GET_EVENT;
     }
 
 
@@ -76,6 +87,9 @@ public class Communication {
                     break;
                 case SEARCH_USER:
                     communicate(infoSearchUser);
+                    break;
+                case GET_EVENT:
+                    communicate((String)infoGetEvent[0], (String)infoGetEvent[1], (String)infoGetEvent[2], (Timestamp)infoGetEvent[3], (String)infoGetEvent[4]);
                     break;
                 default:
                     break;
@@ -122,6 +136,31 @@ public class Communication {
             jsonObj.put("user_birthdate",birthDate);
 
             String res = sendPost(jsonObj, _urlRegister).toString();
+
+            Log.d("res",res);
+
+            if (res.equals("OK")){
+                registerSucceded = true;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void communicate(String name, String longitude, String latitude, Timestamp timeStamp, String description){
+        JSONObject jsonObj = new JSONObject();
+
+        try {
+            jsonObj.put("token", _token);
+            jsonObj.put("event_name",name);
+            jsonObj.put("event_longitude",longitude);
+            jsonObj.put("event_latitude",latitude);
+            jsonObj.put("event_timestamp",timeStamp);
+            jsonObj.put("event_description",description);
+
+
+            String res = sendPost(jsonObj, _urlCreateEvent).toString();
 
             Log.d("res",res);
 
