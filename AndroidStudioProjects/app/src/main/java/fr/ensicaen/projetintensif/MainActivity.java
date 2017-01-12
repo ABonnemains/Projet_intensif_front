@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity
         MapManager mapManager = new MapManager(this, getApplicationContext());
 
         Location location = mapManager.getLocation();
-        getEvenements(location.getLatitude(),location.getLatitude());
+        getEvenements(location.getLatitude(),location.getLongitude());
 
         //new GetTask(this).execute(new Communication("test"));
     }
