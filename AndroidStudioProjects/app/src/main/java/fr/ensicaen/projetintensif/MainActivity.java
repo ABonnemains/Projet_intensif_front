@@ -32,6 +32,9 @@ import org.osmdroid.config.Configuration;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.Polyline;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -39,6 +42,7 @@ public class MainActivity extends AppCompatActivity
     private int getID = 0;
     private MapManager mapManager;
     private Road roadResult;
+    private ArrayList<Polyline> roadOverlays;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,12 +101,12 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        roadOverlays = new ArrayList<Polyline>();
+
         mapManager = new MapManager(this, getApplicationContext());
 
         final TravelTask travelTask = new TravelTask(this, getApplicationContext(), map);
         travelTask.addEventReceiver();
-
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -126,15 +130,14 @@ public class MainActivity extends AppCompatActivity
             }
         });
         String nickname = getIntent().getStringExtra("nickname");
-        if(!nickname.isEmpty())
+        if (!nickname.isEmpty())
             nickname_view.setText(nickname);
-
 
 
         MapManager mapManager = new MapManager(this, getApplicationContext());
         Location location = mapManager.getLocation();
-        getEvenements(location.getLatitude(),location.getLongitude());
-        getObstacles(location.getLatitude(),location.getLongitude());
+        getEvenements(location.getLatitude(), location.getLongitude());
+        getObstacles(location.getLatitude(), location.getLongitude());
 
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -147,7 +150,7 @@ public class MainActivity extends AppCompatActivity
         }, 15000);
         //new GetTask(this).execute(new Communication("test"));
     }
-
+    
     @Override
     public void onResume(){
         super.onResume();
@@ -228,10 +231,11 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void getRoadResult(Road road){
-        Polyline roadOverlay = RoadManager.buildRoadOverlay(road);
-
+        if(roadOverlays.size() >= 1)
+            roadOverlays.get(roadOverlays.size()-1).setVisible(false);
+        roadOverlays.add(RoadManager.buildRoadOverlay(road));
         MapView map = (MapView) findViewById(R.id.map);
-        map.getOverlays().add(roadOverlay);
+        map.getOverlays().add(roadOverlays.get(roadOverlays.size()-1));
         map.invalidate();
     }
 }

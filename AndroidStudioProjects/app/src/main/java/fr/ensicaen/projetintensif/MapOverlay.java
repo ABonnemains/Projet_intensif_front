@@ -151,7 +151,7 @@ public class MapOverlay {
                     JSONObject event = events.getJSONObject(i);
                     Double latitude = (Double) event.get("event_latitude");
                     Double longitude = (Double) event.get("event_longitude");
-                    addMarker(new GeoPoint(latitude, longitude), (String) event.get("event_description"));
+                    addMarker(new GeoPoint(latitude, longitude), (String) event.get("event_name") + "\n" + (String) event.get("event_description"));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
