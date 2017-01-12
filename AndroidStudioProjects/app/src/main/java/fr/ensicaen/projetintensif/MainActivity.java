@@ -21,6 +21,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import org.json.JSONObject;
 import org.osmdroid.config.Configuration;
@@ -97,6 +98,22 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        View headerLayout = navigationView.getHeaderView(0);
+
+        final TextView nickname_view = (TextView) headerLayout.findViewById(R.id.nickname_view);
+        nickname_view.setClickable(true);
+        nickname_view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), ProfilConfigurationActivity.class);
+                intent.putExtra("nickname", nickname_view.getText().toString());
+                startActivity(intent);
+            }
+        });
+        String nickname = getIntent().getStringExtra("nickname");
+        if(!nickname.isEmpty())
+            nickname_view.setText(nickname);
 
 
         MapManager mapManager = new MapManager(this, getApplicationContext());
