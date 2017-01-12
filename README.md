@@ -83,13 +83,13 @@ Fonctionalités Prioritaire
 - [x] Se connecter
 - [x] Créer un trajet
 - [x] Partager un trajet
-- [ ] Rechercher un trajet
+- [x] Rechercher un trajet
 - [x] Créer une demande d'assistance
 - [x] Signaler un obstacle / une dificulté sur le trajet
-- [ ] Parametrer son profil
+- [x] Parametrer son profil
 
 Fonctionalités Secondaire
-- [ ] Créer un évenement
+- [x] Créer un évenement
 - [ ] S'inscrire à un évenement
 - [ ] Enregistrer un trajet effectué
 - [ ] Notation des trajets
@@ -103,3 +103,5 @@ Fonctionalités Secondaire
 ## Mockup
 ###### Ecran de connexion  
 ![connexion](ressources/ecran_connexion.png)
+###### Ecran de profil  
+![connexion](ressources/ecran_profil.png)
