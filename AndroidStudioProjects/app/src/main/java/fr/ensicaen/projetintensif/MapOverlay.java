@@ -12,6 +12,9 @@ import android.text.InputType;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.osmdroid.api.IGeoPoint;
 import org.osmdroid.events.MapEventsReceiver;
 import org.osmdroid.util.GeoPoint;
@@ -23,6 +26,7 @@ import org.osmdroid.views.overlay.Overlay;
 import org.osmdroid.views.overlay.OverlayItem;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class MapOverlay {
@@ -40,18 +44,19 @@ public class MapOverlay {
     }
 
 
-    private Drawable resizeImage(int id) {
+    private Drawable resizeImage(int id, Double percent) {
         Bitmap bitmap = BitmapFactory.decodeResource(activity.getResources(), id);
-        Double height = bitmap.getHeight()*0.03;
-        Double width = bitmap.getWidth()*0.03;
+        Double height = bitmap.getHeight()*percent;
+        Double width = bitmap.getWidth()*percent;
         bitmap = Bitmap.createScaledBitmap(bitmap, width.intValue(), height.intValue(), false);
         return new BitmapDrawable(activity.getResources(), bitmap);
     }
 
+    /*
     public void addOverlayPosition(final IGeoPoint point){
         OverlayItem myLocationOverlayItem = new OverlayItem("Here", "Current Position", point);
 
-        Drawable drawable = resizeImage(R.drawable.picto_lieux_rouge);
+        Drawable drawable = resizeImage(R.drawable.picto_lieux_rouge, 0.03);
         myLocationOverlayItem.setMarker(drawable);
 
         final ArrayList<OverlayItem> items = new ArrayList<>();
@@ -62,6 +67,7 @@ public class MapOverlay {
                     public boolean onItemSingleTapUp(final int index, final OverlayItem item) {
                         Toast toast = Toast.makeText(context, point.getLatitude() + ", " + point.getLongitude(), Toast.LENGTH_SHORT);
                         toast.show();
+                        mapView.invalidate();
                         return true;
                     }
                     public boolean onItemLongPress(final int index, final OverlayItem item) {
@@ -70,13 +76,14 @@ public class MapOverlay {
                 }, context);
         mapView.getOverlays().add(currentLocationOverlay);
     }
+    */
 
-    public void addMarker(final IGeoPoint point, final String description){
+    public void addMarker(final IGeoPoint point, final String description, int id, Double percent){
         Marker mPin = new Marker(mapView);
         mPin.setPosition((GeoPoint)point);
         mPin.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
         mPin.setTitle(description);
-        Drawable drawable = resizeImage(R.drawable.picto_lieu_blanc);
+        Drawable drawable = resizeImage(id, percent);
         mPin.setIcon(drawable);
         mapView.getOverlays().add(mPin);
     }
@@ -104,10 +111,10 @@ public class MapOverlay {
                         mPin.setPosition(p);
                         mPin.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
                         mPin.setTitle(description);
-                        Bitmap bitmap = BitmapFactory.decodeResource(activity.getResources(), R.drawable.person);
-                        Drawable drawable = new BitmapDrawable(activity.getResources(), bitmap);
+                        Drawable drawable = resizeImage(R.drawable.obstacle, 0.04);
                         mPin.setIcon(drawable);
                         mapView.getOverlays().add(mPin);
+                        mapView.invalidate();
                     }
                 });
 
@@ -135,6 +142,41 @@ public class MapOverlay {
         List<Overlay> listOverlay = mapView.getOverlays();
         if(numberOverlay > 0 && numberOverlay < listOverlay.size()){
             listOverlay.remove(numberOverlay);
+        }
+        mapView.invalidate();
+    }
+
+    public void getDataFromServer(JSONArray events, JSONArray obstacles, JSONObject profile){
+        if(events != null) {
+            for (int i = 0; i < events.length(); i++) {
+                try {
+                    JSONObject event = events.getJSONObject(i);
+                    Double latitude = (Double) event.get("event_latitude");
+                    Double longitude = (Double) event.get("event_longitude");
+                    addMarker(new GeoPoint(latitude, longitude), (String) event.get("event_name") + "\n" + (String) event.get("event_description") + "\n" + new Date((long)event.get("event_timestamp")), R.drawable.picto_lieu_rouge_f, 0.03);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        else {
+            System.out.println("Null");
+        }
+
+        if(obstacles != null) {
+            for (int i = 0; i < obstacles.length(); i++) {
+                try {
+                    JSONObject obstacle = obstacles.getJSONObject(i);
+                    Double latitude = (Double) obstacle.get("object_latitude");
+                    Double longitude = (Double) obstacle.get("object_longitude");
+                    addMarker(new GeoPoint(latitude, longitude), (String) obstacle.get("object_description"), R.drawable.obstacle, 0.04);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        else {
+            System.out.println("Null");
         }
     }
 }

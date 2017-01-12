@@ -43,11 +43,10 @@ public class Communication {
 
     private RequestType _currentRequestType;
     private static String _token;
-    private JSONObject _getRes;
+    private static JSONObject _getRes;
     private static JSONArray _JSONEvents;
     private static JSONArray _JSONObstacles;
     private static JSONArray _JSONHelpNeeded;
-
     private boolean registerSucceded = false;
 
     private String[] infoLogin;
@@ -392,10 +391,21 @@ public class Communication {
         return res;
     }
 
+
     public boolean doesSomeoneNeedHelp(){
         if (_JSONHelpNeeded != null){
             return _JSONHelpNeeded.length() != 0;
         }
         return false;
     }
+
+    public static JSONArray get_JSONEvents() {
+        return _JSONEvents;
+    }
+
+    public static JSONArray get_JSONObstacles() {
+        return _JSONObstacles;
+    }
+
+
 }

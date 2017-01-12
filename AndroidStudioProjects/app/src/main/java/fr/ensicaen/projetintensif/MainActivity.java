@@ -7,6 +7,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
+import android.location.LocationListener;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -25,18 +26,19 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.osmdroid.bonuspack.routing.Road;
 import org.osmdroid.bonuspack.routing.RoadManager;
 import org.osmdroid.config.Configuration;
 import org.osmdroid.views.MapView;
+import org.osmdroid.views.overlay.Marker;
 import org.osmdroid.views.overlay.Polyline;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, LocationListener {
 
     private JSONObject getResult;
     private int getID = 0;
@@ -44,6 +46,10 @@ public class MainActivity extends AppCompatActivity
     private Road roadResult;
     private ArrayList<Polyline> roadOverlays;
     public Location location;
+    private Marker startMarker;
+    private MapView map;
+    private Location currentLocation;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +60,7 @@ public class MainActivity extends AppCompatActivity
 
         FloatingActionButton fabDanger = (FloatingActionButton) findViewById(R.id.fabDanger);
 
-        MapView map = (MapView) findViewById(R.id.map);
+        map = (MapView) findViewById(R.id.map);
         final MapOverlay mapOverlay = new MapOverlay(this, getApplicationContext(), map);
 
 
@@ -106,12 +112,12 @@ public class MainActivity extends AppCompatActivity
             }
         });
         String nickname = getIntent().getStringExtra("nickname");
-        if(!nickname.isEmpty())
+        if (!nickname.isEmpty())
             nickname_view.setText(nickname);
 
 
 
-        MapManager mapManager = new MapManager(this, getApplicationContext());
+        //MapManager mapManager = new MapManager(this, getApplicationContext());
         location = mapManager.getLocation();
         getEvenements(location.getLatitude(),location.getLongitude());
         getObstacles(location.getLatitude(),location.getLongitude());
@@ -149,6 +155,21 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+
+       /*Location location = mapManager.getLocation();
+        getEvenements(location.getLatitude(), location.getLongitude());
+        getObstacles(location.getLatitude(), location.getLongitude());*/
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                JSONArray events = Communication.get_JSONEvents();
+                JSONArray obstacles = Communication.get_JSONObstacles();
+                mapOverlay.getDataFromServer(events, obstacles, null);
+            }
+        }, 15000);
+        //new GetTask(this).execute(new Communication("test"));
     }
 
     @Override
@@ -247,11 +268,12 @@ public class MainActivity extends AppCompatActivity
         map.invalidate();
     }
 
-    public void notifSomeoneAskedHelp(){
+
+    public void notifSomeoneAskedHelp() {
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplication())
-                                .setContentTitle("Un utilisateur est en difficulté.")
-                                .setSmallIcon(R.drawable.alerte)
-                                .setContentText("Proposez votre aide.");
+                .setContentTitle("Un utilisateur est en difficulté.")
+                .setSmallIcon(R.drawable.alerte)
+                .setContentText("Proposez votre aide.");
         Intent resultIntent = new Intent(getApplication(), LoginActivity.class);
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(getApplication());
         stackBuilder.addParentStack(LoginActivity.class);
@@ -260,5 +282,27 @@ public class MainActivity extends AppCompatActivity
         mBuilder.setContentIntent(resultPendingIntent);
         NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         mNotificationManager.notify(1, mBuilder.build());
+    }
+
+
+    @Override
+    public void onLocationChanged(Location location) {
+        mapManager.setLocation(location);
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+
+
     }
 }
