@@ -42,7 +42,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".ProfilConfigurationActivity" />
-        <service android:enabled="true" android:name="fr.ensicaen.projetintensif.LocationService" />
 
     </application>
 
