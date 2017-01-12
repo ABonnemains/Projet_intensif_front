@@ -44,10 +44,7 @@ public class TravelTask {
         mPin = new Marker(mapView);
         mPin.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
         mPin.setTitle("GO");
-        Bitmap bitmap = BitmapFactory.decodeResource(activity.getResources(), R.drawable.picto_lieux_rouge_f);
-        Double height = bitmap.getHeight()*0.03;
-        Double width = bitmap.getWidth()*0.03;
-        bitmap = Bitmap.createScaledBitmap(bitmap, width.intValue(), height.intValue(), false);
+        Bitmap bitmap = BitmapFactory.decodeResource(activity.getResources(), R.drawable.arrivee);
         Drawable drawable = new BitmapDrawable(activity.getResources(), bitmap);
         mPin.setIcon(drawable);
 

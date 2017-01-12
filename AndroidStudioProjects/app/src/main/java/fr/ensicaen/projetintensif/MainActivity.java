@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity
         }, 15000);
         //new GetTask(this).execute(new Communication("test"));
     }
-    
+
     @Override
     public void onResume(){
         super.onResume();
