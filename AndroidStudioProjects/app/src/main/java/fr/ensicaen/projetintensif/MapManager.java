@@ -57,7 +57,7 @@ public class MapManager {
         mapController.setCenter(startPoint);
     }
 
-    private Location getLocation()
+    public Location getLocation()
     {
         if(ContextCompat.checkSelfPermission( _ctx, android.Manifest.permission.ACCESS_FINE_LOCATION ) == PackageManager.PERMISSION_DENIED &&
                 ContextCompat.checkSelfPermission( _ctx, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_DENIED) {
