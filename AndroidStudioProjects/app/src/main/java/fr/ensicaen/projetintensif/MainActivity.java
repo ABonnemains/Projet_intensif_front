@@ -24,14 +24,19 @@ import android.view.View;
 import android.widget.TextView;
 
 import org.json.JSONObject;
+import org.osmdroid.bonuspack.routing.Road;
+import org.osmdroid.bonuspack.routing.RoadManager;
 import org.osmdroid.config.Configuration;
 import org.osmdroid.views.MapView;
+import org.osmdroid.views.overlay.Polyline;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private JSONObject getResult;
     private int getID = 0;
+    private MapManager mapManager;
+    private Road roadResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +95,13 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        mapManager = new MapManager(this, getApplicationContext());
+
+        final TravelTask travelTask = new TravelTask(this, getApplicationContext(), map);
+        travelTask.addEventReceiver();
+
+
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -115,8 +127,6 @@ public class MainActivity extends AppCompatActivity
         if(!nickname.isEmpty())
             nickname_view.setText(nickname);
 
-
-        MapManager mapManager = new MapManager(this, getApplicationContext());
 
         //new GetTask(this).execute(new Communication("test"));
     }
@@ -173,8 +183,8 @@ public class MainActivity extends AppCompatActivity
             ft.beginTransaction().replace(R.id.hello,frag).commit();*/
         } else if (id == R.id.recherche){
             FragmentManager fm = getFragmentManager();
-            Recherche rechercheFragment = new Recherche();
-            rechercheFragment.show(fm,"Recherche");
+            SearchTask searchTaskFragment = new SearchTask();
+            searchTaskFragment.show(fm,"Recherche");
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -185,5 +195,17 @@ public class MainActivity extends AppCompatActivity
     public void setGetResult(JSONObject res){
         getResult = res;
         getID++;
+    }
+
+    public MapManager getMapManager() {
+        return mapManager;
+    }
+
+    public void getRoadResult(Road road){
+        Polyline roadOverlay = RoadManager.buildRoadOverlay(road);
+
+        MapView map = (MapView) findViewById(R.id.map);
+        map.getOverlays().add(roadOverlay);
+        map.invalidate();
     }
 }
