@@ -24,6 +24,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.osmdroid.config.Configuration;
 import org.osmdroid.views.MapView;
@@ -122,6 +123,14 @@ public class MainActivity extends AppCompatActivity
         Location location = mapManager.getLocation();
         getEvenements(location.getLatitude(),location.getLongitude());
 
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                JSONArray events = Communication.get_JSONEvents();
+                mapOverlay.getDataFromServer(events, null, null);
+            }
+        }, 5000);
         //new GetTask(this).execute(new Communication("test"));
     }
 

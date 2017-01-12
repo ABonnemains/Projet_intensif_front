@@ -38,7 +38,7 @@ public class Communication {
     private RequestType _currentRequestType;
     private static String _token;
     private JSONObject _getRes;
-    private JSONArray _JSONEvents;
+    private static JSONArray _JSONEvents;
 
     private boolean registerSucceded = false;
 
@@ -339,5 +339,8 @@ public class Communication {
         return res;
     }
 
+    public static JSONArray get_JSONEvents() {
+        return _JSONEvents;
+    }
 
 }

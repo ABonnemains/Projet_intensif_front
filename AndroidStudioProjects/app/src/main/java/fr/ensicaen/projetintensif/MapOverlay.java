@@ -12,6 +12,9 @@ import android.text.InputType;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.osmdroid.api.IGeoPoint;
 import org.osmdroid.events.MapEventsReceiver;
 import org.osmdroid.util.GeoPoint;
@@ -76,7 +79,7 @@ public class MapOverlay {
         mPin.setPosition((GeoPoint)point);
         mPin.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
         mPin.setTitle(description);
-        Drawable drawable = resizeImage(R.drawable.picto_lieu_blanc);
+        Drawable drawable = resizeImage(R.drawable.picto_lieu_rouge_f);
         mPin.setIcon(drawable);
         mapView.getOverlays().add(mPin);
     }
@@ -135,6 +138,24 @@ public class MapOverlay {
         List<Overlay> listOverlay = mapView.getOverlays();
         if(numberOverlay > 0 && numberOverlay < listOverlay.size()){
             listOverlay.remove(numberOverlay);
+        }
+    }
+
+    public void getDataFromServer(JSONArray events, JSONArray obstacles, JSONObject profile){
+        if(events != null) {
+            for (int i = 0; i < events.length(); i++) {
+                try {
+                    JSONObject event = events.getJSONObject(i);
+                    Double latitude = (Double) event.get("event_latitude");
+                    Double longitude = (Double) event.get("event_longitude");
+                    addMarker(new GeoPoint(latitude, longitude), (String) event.get("event_description"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        else {
+            System.out.println("Null");
         }
     }
 }
