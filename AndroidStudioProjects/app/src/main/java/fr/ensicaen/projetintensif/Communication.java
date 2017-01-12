@@ -19,7 +19,8 @@ public class Communication {
     public enum RequestType{
         LOGIN,
         REGISTER,
-        SEARCH_USER
+        SEARCH_USER,
+        OBSTACLE
     }
 
     private final String _serverURL = "https://roule-ma-poule.herokuapp.com/";
@@ -27,6 +28,7 @@ public class Communication {
     private final String _urlLogin = "authentication/login";
     private final String _urlRegister = "authentication/register";
     private final  String _urlGetProfile = "authentication/profile/";
+    private final String _urlCreateObstacle = "obstacle/create";
 
     private RequestType _currentRequestType;
     private static String _token;
@@ -35,6 +37,7 @@ public class Communication {
     private boolean registerSucceded = false;
 
     private String[] infoLogin;
+    private String[] infoObstacle;
 
     private Object[] infoRegister;
 
@@ -50,6 +53,11 @@ public class Communication {
     {
         infoLogin = new String[]{login, pw};
         _currentRequestType = RequestType.LOGIN;
+    }
+
+    public Communication(String description, String type, String longitude, String latitude){
+        infoObstacle = new String[]{description, type, longitude, latitude};
+        _currentRequestType = RequestType.OBSTACLE;
     }
 
 
@@ -77,6 +85,8 @@ public class Communication {
                 case SEARCH_USER:
                     communicate(infoSearchUser);
                     break;
+                case OBSTACLE:
+                    communicate((String)infoObstacle[0], (String)infoObstacle[1], (String)infoObstacle[2], (String)infoObstacle[3]);
                 default:
                     break;
             }
@@ -121,7 +131,7 @@ public class Communication {
             jsonObj.put("user_phone",phoneNumber);
             jsonObj.put("user_birthdate",birthDate);
 
-            String res = sendPost(jsonObj, _urlRegister).toString();
+            String res = sendPost(jsonObj, _urlCreateObstacle).toString();
 
             Log.d("res",res);
 
@@ -132,6 +142,27 @@ public class Communication {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void communicate(String description, String type, String longitude, String latitude){
+        JSONObject jsonObj = new JSONObject();
+
+        try {
+            jsonObj.put("token", _token);
+            jsonObj.put("description",description);
+            jsonObj.put("type",type);
+            jsonObj.put("longitude",longitude);
+            jsonObj.put("latitude",latitude);
+            jsonObj.put("utilisateur_id", "");
+
+            String res = sendPost(jsonObj, _urlCreateObstacle).toString();
+
+            Log.d("res",res);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     public String getToken()

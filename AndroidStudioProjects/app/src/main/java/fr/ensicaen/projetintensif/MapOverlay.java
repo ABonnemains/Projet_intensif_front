@@ -8,7 +8,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.support.v4.content.ContextCompat;
 import android.text.InputType;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -40,14 +39,19 @@ public class MapOverlay {
         this.mapView = mapView;
     }
 
-    public void addOverlayPosition(final IGeoPoint point){
-        OverlayItem myLocationOverlayItem = new OverlayItem("Here", "Current Position", point);
 
-        Bitmap bitmap = BitmapFactory.decodeResource(activity.getResources(), R.drawable.picto_lieux_rouge);
+    private Drawable resizeImage(int id) {
+        Bitmap bitmap = BitmapFactory.decodeResource(activity.getResources(), id);
         Double height = bitmap.getHeight()*0.03;
         Double width = bitmap.getWidth()*0.03;
         bitmap = Bitmap.createScaledBitmap(bitmap, width.intValue(), height.intValue(), false);
-        Drawable drawable = new BitmapDrawable(activity.getResources(), bitmap);
+        return new BitmapDrawable(activity.getResources(), bitmap);
+    }
+
+    public void addOverlayPosition(final IGeoPoint point){
+        OverlayItem myLocationOverlayItem = new OverlayItem("Here", "Current Position", point);
+
+        Drawable drawable = resizeImage(R.drawable.picto_lieux_rouge);
         myLocationOverlayItem.setMarker(drawable);
 
         final ArrayList<OverlayItem> items = new ArrayList<>();
@@ -67,12 +71,21 @@ public class MapOverlay {
         mapView.getOverlays().add(currentLocationOverlay);
     }
 
+    public void addMarker(final IGeoPoint point, final String description){
+        Marker mPin = new Marker(mapView);
+        mPin.setPosition((GeoPoint)point);
+        mPin.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+        mPin.setTitle(description);
+        Drawable drawable = resizeImage(R.drawable.picto_lieu_blanc);
+        mPin.setIcon(drawable);
+        mapView.getOverlays().add(mPin);
+    }
+
     public void addEventReceiver() {
         MapEventsReceiver mReceive = new MapEventsReceiver() {
             @Override
             public boolean singleTapConfirmedHelper(final GeoPoint p) {
                 //Send point to server
-
                 AlertDialog.Builder alert = new AlertDialog.Builder(activity);
                 alert.setTitle("Obstacle");
                 alert.setMessage("Description");
@@ -84,6 +97,9 @@ public class MapOverlay {
                 alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         final String description = editText.getText().toString();
+
+                        new GetTask((MainActivity)activity).execute(new Communication(description, "obstacle", p.getLongitude()+"", p.getLatitude()+""));
+
                         Marker mPin = new Marker(mapView);
                         mPin.setPosition(p);
                         mPin.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
