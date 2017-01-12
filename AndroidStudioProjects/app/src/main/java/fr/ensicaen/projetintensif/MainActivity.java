@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity
         getEvenements(location.getLatitude(),location.getLongitude());
         getObstacles(location.getLatitude(),location.getLongitude());
 
-        //new GetTask(this).execute(new Communication("test"));
+        new GetTask(this).execute(new Communication("test"));
     }
 
     @Override
