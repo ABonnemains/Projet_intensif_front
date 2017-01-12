@@ -23,7 +23,8 @@ public class Communication {
         SEARCH_USER,
         OBSTACLE,
         GET_EVENT,
-        GET_ALL_EVENTS
+        GET_ALL_EVENTS,
+        GET_ALL_OBSTACLES
     }
 
     private final String _serverURL = "https://roule-ma-poule.herokuapp.com/";
@@ -34,12 +35,13 @@ public class Communication {
     private final String _urlCreateObstacle = "obstacle/create";
     private final String _urlCreateEvent = "event/create";
     private final String _urlGetEvents = "event/list/";
+    private final String _urlGetObstacles = "obstacle/list/";
 
     private RequestType _currentRequestType;
     private static String _token;
     private JSONObject _getRes;
     private static JSONArray _JSONEvents;
-
+    private static JSONArray _JSONObstacles;
     private boolean registerSucceded = false;
 
     private String[] infoLogin;
@@ -51,8 +53,10 @@ public class Communication {
 
     private double[] infoEvents;
 
+
+
     // Constructeur pour register
-    public Communication(String login, String pw, String pwConfirm, String name, String surname, String phoneNumber, Timestamp birthDate){
+    public Communication(String login, String pw, String pwConfirm, String name, String surname, String phoneNumber, long birthDate){
         infoRegister = new Object[]{login, pw, pwConfirm, name, surname,phoneNumber,birthDate};
         _currentRequestType = RequestType.REGISTER;
     }
@@ -72,14 +76,14 @@ public class Communication {
     }
 
     //Constructeur pour create event
-    public Communication(String name, String longitude, String latitude, Timestamp timeStamp, String description){
+    public Communication(String name, String longitude, String latitude, long timeStamp, String description){
         infoGetEvent = new Object[]{name,longitude,latitude,timeStamp,description};
         _currentRequestType = RequestType.GET_EVENT;
     }
 
-    public Communication(double latitude, double longitude) {
+    public Communication(double latitude, double longitude, RequestType type) {
         infoEvents = new double[]{latitude ,longitude};
-        _currentRequestType = RequestType.GET_ALL_EVENTS;
+        _currentRequestType = type;
     }
 
     public boolean getRegisterSucceded() {
@@ -101,7 +105,7 @@ public class Communication {
                     communicate(infoLogin[0], infoLogin[1]);
                     break;
                 case REGISTER:
-                    communicate((String)infoRegister[0],(String)infoRegister[1],(String)infoRegister[2],(String)infoRegister[3],(String)infoRegister[4],(String)infoRegister[5],(Timestamp)infoRegister[6]);
+                    communicate((String)infoRegister[0],(String)infoRegister[1],(String)infoRegister[2],(String)infoRegister[3],(String)infoRegister[4],(String)infoRegister[5],(long)infoRegister[6]);
                     break;
                 case SEARCH_USER:
                     communicate(infoSearchUser);
@@ -110,10 +114,13 @@ public class Communication {
                     communicate((String)infoObstacle[0], (String)infoObstacle[1], (String)infoObstacle[2], (String)infoObstacle[3]);
                     break;
                 case GET_EVENT:
-                    communicate((String)infoGetEvent[0], (String)infoGetEvent[1], (String)infoGetEvent[2], (Timestamp)infoGetEvent[3], (String)infoGetEvent[4]);
+                    communicate((String)infoGetEvent[0], (String)infoGetEvent[1], (String)infoGetEvent[2], (long)infoGetEvent[3], (String)infoGetEvent[4]);
                     break;
                 case GET_ALL_EVENTS:
-                    communicate(infoEvents[0], infoEvents[1]);
+                    communicate(infoEvents[0], infoEvents[1], _urlGetEvents);
+                    break;
+                case GET_ALL_OBSTACLES:
+                    communicate(infoEvents[0], infoEvents[1], _urlGetObstacles);
                     break;
                 default:
                     break;
@@ -148,9 +155,16 @@ public class Communication {
         }
     }
 
-    private void communicate(double latitude, double longitude) {
+
+    private void communicate(double latitude, double longitude, String url) {
         try {
-            _JSONEvents = sendGetArray( _urlGetEvents+_token+"/"+latitude+"/"+longitude);
+            if (url.equals(_urlGetEvents)){
+                _JSONEvents = sendGetArray( url+_token+"/"+latitude+"/"+longitude);
+            }
+            else if (url.equals(_urlGetObstacles)){
+                _JSONObstacles = sendGetArray( url+_token+"/"+latitude+"/"+longitude);
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -158,7 +172,8 @@ public class Communication {
 
     }
 
-    private void communicate(String login, String pw, String pwConfirm, String name, String surname, String phoneNumber, Timestamp birthDate){
+
+    private void communicate(String login, String pw, String pwConfirm, String name, String surname, String phoneNumber, long birthDate){
         JSONObject jsonObj = new JSONObject();
 
         try {
@@ -203,7 +218,8 @@ public class Communication {
         }
     }
 
-    private void communicate(String name, String longitude, String latitude, Timestamp timeStamp, String description){
+
+    private void communicate(String name, String longitude, String latitude, long timeStamp, String description){
         JSONObject jsonObj = new JSONObject();
 
         try {

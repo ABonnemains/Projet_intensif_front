@@ -65,6 +65,7 @@ public class MapOverlay {
                     public boolean onItemSingleTapUp(final int index, final OverlayItem item) {
                         Toast toast = Toast.makeText(context, point.getLatitude() + ", " + point.getLongitude(), Toast.LENGTH_SHORT);
                         toast.show();
+                        mapView.invalidate();
                         return true;
                     }
                     public boolean onItemLongPress(final int index, final OverlayItem item) {
@@ -111,6 +112,7 @@ public class MapOverlay {
                         Drawable drawable = new BitmapDrawable(activity.getResources(), bitmap);
                         mPin.setIcon(drawable);
                         mapView.getOverlays().add(mPin);
+                        mapView.invalidate();
                     }
                 });
 
@@ -139,6 +141,7 @@ public class MapOverlay {
         if(numberOverlay > 0 && numberOverlay < listOverlay.size()){
             listOverlay.remove(numberOverlay);
         }
+        mapView.invalidate();
     }
 
     public void getDataFromServer(JSONArray events, JSONArray obstacles, JSONObject profile){
@@ -149,6 +152,22 @@ public class MapOverlay {
                     Double latitude = (Double) event.get("event_latitude");
                     Double longitude = (Double) event.get("event_longitude");
                     addMarker(new GeoPoint(latitude, longitude), (String) event.get("event_description"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        else {
+            System.out.println("Null");
+        }
+
+        if(obstacles != null) {
+            for (int i = 0; i < obstacles.length(); i++) {
+                try {
+                    JSONObject obstacle = obstacles.getJSONObject(i);
+                    Double latitude = (Double) obstacle.get("object_latitude");
+                    Double longitude = (Double) obstacle.get("object_longitude");
+                    addMarker(new GeoPoint(latitude, longitude), (String) obstacle.get("object_description"));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

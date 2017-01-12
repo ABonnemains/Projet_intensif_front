@@ -35,8 +35,9 @@ public class CreateEvent extends DialogFragment {
         try{
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yy");
             Date parsedDate = dateFormat.parse(date);
-            Timestamp timestamp = new Timestamp(parsedDate.getTime());
-            new GetTask((MainActivity)this.getActivity()).execute(new Communication(name,longitude,latitude, timestamp,description));
+            Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
+            long lTimestanp = timestamp.getTime();
+            new GetTask((MainActivity)this.getActivity()).execute(new Communication(name,longitude,latitude, lTimestanp,description));
         }catch(Exception e){
         }
 
@@ -93,7 +94,7 @@ public class CreateEvent extends DialogFragment {
 
                 DatePickerDialog mDatePicker = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
                     public void onDateSet(DatePicker datepicker, int selectedYear, int selectedMonth, int selectedDay) {
-                        String format = "dd/MM/yy";
+                        String format = "dd/MM/yyyy";
                         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
                         Calendar myCalendar = Calendar.getInstance();
                         myCalendar.set(Calendar.YEAR, selectedYear);
