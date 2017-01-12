@@ -5,6 +5,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -118,6 +119,9 @@ public class MainActivity extends AppCompatActivity
 
         MapManager mapManager = new MapManager(this, getApplicationContext());
 
+        Location location = mapManager.getLocation();
+        getEvenements(location.getLatitude(),location.getLatitude());
+
         //new GetTask(this).execute(new Communication("test"));
     }
 
@@ -185,5 +189,9 @@ public class MainActivity extends AppCompatActivity
     public void setGetResult(JSONObject res){
         getResult = res;
         getID++;
+    }
+
+    public void getEvenements(double latitude, double longitude){
+        new GetTask((MainActivity)this).execute(new Communication(latitude,longitude));
     }
 }
