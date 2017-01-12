@@ -39,6 +39,7 @@ public class SignupActivity extends AppCompatActivity {
     private CheckBox _terms_and_conditions_checkbox;
     private Button _validate;
     private TextView _link_login;
+    private boolean registerSuccessful = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -192,10 +193,15 @@ public class SignupActivity extends AppCompatActivity {
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
-                        onSignupSuccess();
+                        if(registerSuccessful){
+                            onSignupSuccess();
+                        }
+                        else{
+                            onSignupFailed();
+                        }
                         progressDialog.dismiss();
                     }
-                }, 3000);
+                }, 10000);
 
     }
 
@@ -203,7 +209,8 @@ public class SignupActivity extends AppCompatActivity {
     public void onSignupSuccess() {
         _validate.setEnabled(true);
         setResult(RESULT_OK, null);
-        finish();
+        Intent intent = new Intent(getBaseContext(),LoginActivity.class);
+        getBaseContext().startActivity(intent);
     }
 
     public void onSignupFailed() {
@@ -297,5 +304,9 @@ public class SignupActivity extends AppCompatActivity {
         }*/
 
         return valid;
+    }
+
+    public void setRegisterSucces(boolean registerSucceded) {
+        registerSuccessful = registerSucceded;
     }
 }

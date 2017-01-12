@@ -23,12 +23,15 @@ public class Communication {
         REGISTER
     }
 
-    private final String _serverURL = "https://secure-lake-76948.herokuapp.com/";
+    private final String _serverURL = "https://roule-ma-poule.herokuapp.com/";
+    //private final String _serverURL = "https://secure-lake-76948.herokuapp.com/";
     private final String _urlLogin = "authentication/login";
     private final String _urlRegister = "authentication/register";
 
     private RequestType _currentRequestType;
     private static String _token;
+
+    private boolean registerSucceded = false;
 
     private String[] infoLogin;
     private Object[] infoRegister;
@@ -43,6 +46,12 @@ public class Communication {
         infoLogin = new String[]{login, pw};
         _currentRequestType = RequestType.LOGIN;
     }
+
+
+    public boolean getRegisterSucceded() {
+        return registerSucceded;
+    }
+
 
     public void communicate(){
         try {
@@ -90,8 +99,11 @@ public class Communication {
             jsonObj.put("user_birthdate",birthDate);
 
             String res = sendPost(jsonObj, _urlRegister);
+
+            Log.d("res",res);
+
             if (res.equals("OK")){
-                communicate(login, pw);
+                registerSucceded = true;
             }
 
         } catch (Exception e) {
@@ -128,7 +140,7 @@ public class Communication {
         Log.d("POST : jsonObject : ", jsonObject.toString());
         Log.d("POST : Response Code : ", responseCode + "");
 
-        if (responseCode == 401 || responseCode == 404)
+        if (responseCode != 200)
         {
             return null;
         }
@@ -171,9 +183,8 @@ public class Communication {
         wr.close();
 
         int responseCode = con.getResponseCode();
-        System.out.println("\nSending 'POST' request to URL : " + _serverURL + _urlLogin);
-        System.out.println("Post parameters : " );
-        System.out.println("Response Code : " + responseCode);
+        Log.d("Sending request to: ", "" + _serverURL + _urlLogin);
+        Log.d("Response Code : ", "" + responseCode);
 
         BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
         String inputLine;

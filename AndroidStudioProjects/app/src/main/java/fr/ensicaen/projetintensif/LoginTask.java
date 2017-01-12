@@ -10,7 +10,6 @@ public class LoginTask extends AsyncTask<Communication,Void,Communication> {
 
     protected Communication doInBackground(Communication... handler){
         handler[0].communicate();
-
         return handler[0];
     }
 
@@ -18,6 +17,4 @@ public class LoginTask extends AsyncTask<Communication,Void,Communication> {
     {
         activity.setLoginSuccess(handler.getToken());
     }
-
-
 }

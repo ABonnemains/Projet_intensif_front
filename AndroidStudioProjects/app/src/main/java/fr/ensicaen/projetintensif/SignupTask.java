@@ -13,4 +13,8 @@ public class SignupTask extends AsyncTask<Communication,Void,Communication> {
         return handler[0];
     }
 
+    protected void onPostExecute(Communication handler)
+    {
+        activity.setRegisterSucces(handler.getRegisterSucceded());
+    }
 }
