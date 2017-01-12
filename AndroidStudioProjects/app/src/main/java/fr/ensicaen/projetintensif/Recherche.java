@@ -43,10 +43,10 @@ public class Recherche extends DialogFragment {
                 new android.os.Handler().postDelayed(
                         new Runnable() {
                             public void run() {
-                                /*
+
                                 RoadManager road_manager = new OSRMRoadManager(getActivity().getApplicationContext());
                                 MapManager mapManager = ((MainActivity) getActivity()).getMapManager();
-                                GeoPoint startPoint = mapManager.getCurrentLocation();
+                                GeoPoint startPoint = new GeoPoint(mapManager.getLocation());
                                 GeoPoint endPoint = new GeoPoint(49.17516, -0.35455);
 
                                 ArrayList<GeoPoint> waypoints = new ArrayList<GeoPoint>();
@@ -60,7 +60,7 @@ public class Recherche extends DialogFragment {
                                 MapView map = (MapView) ((MainActivity) getActivity()).findViewById(R.id.map);
                                 map.getOverlays().add(roadOverlay);
 
-                                map.invalidate();*/
+                                map.invalidate();
                                 progressDialog.dismiss();
                             }
                         }, 1000);

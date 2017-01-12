@@ -85,8 +85,6 @@ public class LoginActivity extends AppCompatActivity {
 
         _login_button.setEnabled(false);
 
-        final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
-                R.style.AppTheme_PopupOverlay);
         /*final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
                 R.style.AppTheme_PopupOverlay);*/
 
@@ -113,7 +111,6 @@ public class LoginActivity extends AppCompatActivity {
                         }
                         progressDialog.dismiss();
                     }
-                }, 3000);
                 }, 20000);
 
         _login_button.setEnabled(true);

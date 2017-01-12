@@ -22,7 +22,7 @@ public class Communication {
         REGISTER
     }
 
-    private final String _serverURL = "https://secure-lake-76948.herokuapp.com/";
+    private final String _serverURL = "https://roule-ma-poule.herokuapp.com/";
     private final String _urlLogin = "authentication/login";
     private final String _urlRegister = "authentication/register";
 

@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity
         fabDanger.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Danger", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Danger", Snackbar.LENGTH_LONG);
                 Snackbar.make(view, "Assistance", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
 
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity
         fabAssistance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Assistance", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Assistance", Snackbar.LENGTH_LONG);
                 Snackbar.make(view, "Danger", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
                 mapOverlay.addEventReceiver();
@@ -156,7 +156,6 @@ public class MainActivity extends AppCompatActivity
             fm.beginTransaction().replace(R.id.blank_fragment,frag).commit();*/
 
             FragmentManager fm = getFragmentManager();
-             FragmentManager fm = getFragmentManager();
             CreateEvent ce = new CreateEvent();
             ce.show(fm,"Créer un évènement");
 
@@ -177,4 +176,5 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+    public getG
 }
