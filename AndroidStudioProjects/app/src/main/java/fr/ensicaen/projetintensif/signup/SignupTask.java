@@ -1,6 +1,8 @@
-package fr.ensicaen.projetintensif;
+package fr.ensicaen.projetintensif.signup;
 
 import android.os.AsyncTask;
+
+import fr.ensicaen.projetintensif.communication.Communication;
 
 public class SignupTask extends AsyncTask<Communication,Void,Communication> {
 

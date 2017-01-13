@@ -1,7 +1,8 @@
-package fr.ensicaen.projetintensif;
+package fr.ensicaen.projetintensif.communication;
 
-import android.app.Activity;
 import android.os.AsyncTask;
+
+import fr.ensicaen.projetintensif.MainActivity;
 
 public class GetTask extends AsyncTask<Communication,Void,Communication> {
 

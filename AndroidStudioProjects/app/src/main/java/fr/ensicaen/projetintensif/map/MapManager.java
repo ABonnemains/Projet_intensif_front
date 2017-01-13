@@ -1,4 +1,4 @@
-package fr.ensicaen.projetintensif;
+package fr.ensicaen.projetintensif.map;
 
 import android.Manifest;
 import android.app.Activity;
@@ -22,6 +22,9 @@ import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.Marker;
 
 import java.util.List;
+
+import fr.ensicaen.projetintensif.MainActivity;
+import fr.ensicaen.projetintensif.R;
 
 public class MapManager {
     private MainActivity _activity;

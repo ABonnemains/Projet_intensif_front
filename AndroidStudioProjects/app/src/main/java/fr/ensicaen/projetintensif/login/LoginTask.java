@@ -1,6 +1,8 @@
-package fr.ensicaen.projetintensif;
+package fr.ensicaen.projetintensif.login;
 
 import android.os.AsyncTask;
+
+import fr.ensicaen.projetintensif.communication.Communication;
 
 public class LoginTask extends AsyncTask<Communication,Void,Communication> {
 

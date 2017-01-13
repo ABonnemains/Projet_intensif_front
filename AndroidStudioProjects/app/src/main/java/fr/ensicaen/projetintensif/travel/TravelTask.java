@@ -1,12 +1,10 @@
-package fr.ensicaen.projetintensif;
+package fr.ensicaen.projetintensif.travel;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.location.LocationManager;
-import android.util.Log;
 
 import org.osmdroid.events.MapEventsReceiver;
 import org.osmdroid.util.GeoPoint;
@@ -17,6 +15,10 @@ import org.osmdroid.views.overlay.Overlay;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import fr.ensicaen.projetintensif.MainActivity;
+import fr.ensicaen.projetintensif.R;
+import fr.ensicaen.projetintensif.map.MapManager;
 
 /**
  * Created by Amine on 12/01/2017.

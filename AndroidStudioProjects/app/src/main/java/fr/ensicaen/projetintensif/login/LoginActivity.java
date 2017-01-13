@@ -1,10 +1,9 @@
-package fr.ensicaen.projetintensif;
+package fr.ensicaen.projetintensif.login;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -12,6 +11,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import fr.ensicaen.projetintensif.communication.Communication;
+import fr.ensicaen.projetintensif.MainActivity;
+import fr.ensicaen.projetintensif.R;
+import fr.ensicaen.projetintensif.signup.SignupActivity;
 
 import static android.view.KeyEvent.ACTION_DOWN;
 import static android.view.KeyEvent.KEYCODE_ENTER;

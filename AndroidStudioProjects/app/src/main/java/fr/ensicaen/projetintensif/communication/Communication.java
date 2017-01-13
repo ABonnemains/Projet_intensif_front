@@ -1,4 +1,4 @@
-package fr.ensicaen.projetintensif;
+package fr.ensicaen.projetintensif.communication;
 
 import android.util.Log;
 

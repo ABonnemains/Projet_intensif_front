@@ -1,11 +1,9 @@
-package fr.ensicaen.projetintensif;
+package fr.ensicaen.projetintensif.event;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.DialogFragment;
-import android.app.PendingIntent;
 import android.app.TimePickerDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +22,12 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+import fr.ensicaen.projetintensif.MainActivity;
+import fr.ensicaen.projetintensif.R;
+import fr.ensicaen.projetintensif.communication.Communication;
+import fr.ensicaen.projetintensif.communication.GetTask;
+import fr.ensicaen.projetintensif.map.MapOverlay;
 
 public class CreateEvent extends DialogFragment {
 

@@ -1,4 +1,4 @@
-package fr.ensicaen.projetintensif;
+package fr.ensicaen.projetintensif.travel;
 
 import java.util.ArrayList;
 
@@ -9,6 +9,8 @@ import org.osmdroid.bonuspack.routing.OSRMRoadManager;
 import org.osmdroid.bonuspack.routing.Road;
 import org.osmdroid.bonuspack.routing.RoadManager;
 import org.osmdroid.util.GeoPoint;
+
+import fr.ensicaen.projetintensif.MainActivity;
 
 public class RoutingTask extends AsyncTask<ArrayList<GeoPoint>, Void, Road> {
 

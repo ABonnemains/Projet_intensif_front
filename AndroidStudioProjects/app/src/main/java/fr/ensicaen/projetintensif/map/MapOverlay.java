@@ -1,4 +1,4 @@
-package fr.ensicaen.projetintensif;
+package fr.ensicaen.projetintensif.map;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -10,7 +10,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.text.InputType;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,15 +18,17 @@ import org.osmdroid.api.IGeoPoint;
 import org.osmdroid.events.MapEventsReceiver;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
-import org.osmdroid.views.overlay.ItemizedIconOverlay;
 import org.osmdroid.views.overlay.MapEventsOverlay;
 import org.osmdroid.views.overlay.Marker;
 import org.osmdroid.views.overlay.Overlay;
-import org.osmdroid.views.overlay.OverlayItem;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import fr.ensicaen.projetintensif.communication.Communication;
+import fr.ensicaen.projetintensif.communication.GetTask;
+import fr.ensicaen.projetintensif.MainActivity;
+import fr.ensicaen.projetintensif.R;
 
 public class MapOverlay {
 

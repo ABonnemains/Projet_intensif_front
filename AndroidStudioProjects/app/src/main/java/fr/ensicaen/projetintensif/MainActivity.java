@@ -1,6 +1,5 @@
 package fr.ensicaen.projetintensif;
 
-import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -37,6 +36,16 @@ import org.osmdroid.views.overlay.Marker;
 import org.osmdroid.views.overlay.Polyline;
 
 import java.util.ArrayList;
+
+import fr.ensicaen.projetintensif.communication.Communication;
+import fr.ensicaen.projetintensif.communication.GetTask;
+import fr.ensicaen.projetintensif.communication.RefreshHelpTask;
+import fr.ensicaen.projetintensif.event.CreateEvent;
+import fr.ensicaen.projetintensif.login.LoginActivity;
+import fr.ensicaen.projetintensif.map.MapManager;
+import fr.ensicaen.projetintensif.map.MapOverlay;
+import fr.ensicaen.projetintensif.profilConfig.ProfilConfigurationActivity;
+import fr.ensicaen.projetintensif.travel.TravelTask;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, LocationListener {

@@ -1,6 +1,8 @@
-package fr.ensicaen.projetintensif;
+package fr.ensicaen.projetintensif.communication;
 
 import android.os.AsyncTask;
+
+import fr.ensicaen.projetintensif.MainActivity;
 
 /**
  * Created by Maxime on 12/01/2017.

@@ -1,4 +1,4 @@
-package fr.ensicaen.projetintensif;
+package fr.ensicaen.projetintensif.signup;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -20,6 +20,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+
+import fr.ensicaen.projetintensif.communication.Communication;
+import fr.ensicaen.projetintensif.R;
+import fr.ensicaen.projetintensif.login.LoginActivity;
 
 import static android.view.KeyEvent.ACTION_DOWN;
 import static android.view.KeyEvent.KEYCODE_ENTER;

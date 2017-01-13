@@ -1,4 +1,4 @@
-package fr.ensicaen.projetintensif;
+package fr.ensicaen.projetintensif.profilConfig;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import fr.ensicaen.projetintensif.R;
 
 import static android.view.KeyEvent.ACTION_DOWN;
 import static android.view.KeyEvent.KEYCODE_ENTER;
