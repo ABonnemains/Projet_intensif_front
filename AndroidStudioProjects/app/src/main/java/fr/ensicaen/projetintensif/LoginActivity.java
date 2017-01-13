@@ -104,6 +104,7 @@ public class LoginActivity extends AppCompatActivity {
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
+                        onLoginSuccess();
                         if(_loginSuccessful){
                            onLoginSuccess();
                         }

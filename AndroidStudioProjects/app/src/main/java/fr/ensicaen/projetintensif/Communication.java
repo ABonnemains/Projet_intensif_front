@@ -7,9 +7,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.sql.Timestamp;
 
@@ -19,6 +22,7 @@ public class Communication {
 
     public enum RequestType{
         LOGIN,
+        REGISTER
         REGISTER,
         SEARCH_USER,
         OBSTACLE,
@@ -29,6 +33,7 @@ public class Communication {
         REFRESH_ASSIST
     }
 
+    private final String _serverURL = "https://secure-lake-76948.herokuapp.com/";
     private final String _serverURL = "https://roule-ma-poule.herokuapp.com/";
     //private final String _serverURL = "https://secure-lake-76948.herokuapp.com/";
     private final String _urlLogin = "authentication/login";
@@ -112,6 +117,7 @@ public class Communication {
                 case REGISTER:
                     communicate((String)infoRegister[0],(String)infoRegister[1],(String)infoRegister[2],(String)infoRegister[3],(String)infoRegister[4],(String)infoRegister[5],(long)infoRegister[6]);
                     break;
+
                 case SEARCH_USER:
                     communicate(infoSearchUser);
                     break;
@@ -149,6 +155,7 @@ public class Communication {
             jsonObj.put("login", login);
             jsonObj.put("password",pwd);
 
+            _token = sendPost(jsonObj, _urlLogin);
             _token = sendPost(jsonObj, _urlLogin).split("\"")[3];
 
             Log.d("Login : ", _token);
@@ -290,6 +297,7 @@ public class Communication {
     }
 
     private String sendPost(JSONObject jsonObject, String urlPost)throws Exception{
+
         URL obj = new URL(_serverURL+urlPost);
 
         HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
@@ -308,11 +316,13 @@ public class Communication {
 
         int responseCode = con.getResponseCode();
 
+        Log.d("POST : url : ",  _serverURL + _urlLogin);
 
         Log.d("POST : url : ",  _serverURL + urlPost);
         Log.d("POST : jsonObject : ", jsonObject.toString());
         Log.d("POST : Response Code : ", responseCode + "");
 
+        if (responseCode == 401 || responseCode == 404)
 
         if (responseCode != 200)
         {
@@ -328,6 +338,7 @@ public class Communication {
         }
         in.close();
 
+        Log.d("POST : Response : ", response.toString());
         Log.d("POST : Response ", response.toString());
 
         return response.toString();
@@ -339,17 +350,33 @@ public class Communication {
         con.setRequestMethod("GET");
         con.setRequestProperty( "Accept", "*/*" );
 
+    public void sendPost() throws Exception {
         int responseCode = con.getResponseCode();
 
+        URL obj = new URL(_serverURL+_urlLogin);
+        HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
 
+        //add request header
+        con.setRequestMethod("POST");
+        con.setRequestProperty( "Content-type", "application/json");
+        con.setRequestProperty( "Accept", "*/*" );
         Log.d("GET : url ",  _serverURL + urlGet);
         Log.d("GET : Response Code ", responseCode + "");
 
+        JSONObject jsonObj = new JSONObject();
+        jsonObj.put("login", "test");
+        jsonObj.put("password","test");
 
+        // Send post request
+        con.setDoOutput(true);
         BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
         String inputLine;
         StringBuffer response = new StringBuffer();
 
+        OutputStreamWriter wr = new OutputStreamWriter(con.getOutputStream());
+        wr.write(jsonObj.toString());
+        wr.flush();
+        wr.close();
         while ((inputLine = in.readLine()) != null) {
             response.append(inputLine);
         }
@@ -369,6 +396,9 @@ public class Communication {
         con.setRequestProperty( "Accept", "*/*" );
 
         int responseCode = con.getResponseCode();
+        System.out.println("\nSending 'POST' request to URL : " + _serverURL + _urlLogin);
+        System.out.println("Post parameters : " );
+        System.out.println("Response Code : " + responseCode);
 
 
         Log.d("GET : url ",  _serverURL + urlGet);
@@ -384,6 +414,8 @@ public class Communication {
         }
         in.close();
 
+        //print result
+        System.out.println(response.toString());
         Log.d("GET : Response ", response.toString());
 
         JSONArray res = new JSONArray(response.toString());

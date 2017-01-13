@@ -1,5 +1,6 @@
 package fr.ensicaen.projetintensif;
 
+
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.NotificationManager;
@@ -38,7 +39,9 @@ import org.osmdroid.views.overlay.Polyline;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
         implements NavigationView.OnNavigationItemSelectedListener, LocationListener {
+
 
     private JSONObject getResult;
     private int getID = 0;
@@ -60,16 +63,50 @@ public class MainActivity extends AppCompatActivity
 
         FloatingActionButton fabDanger = (FloatingActionButton) findViewById(R.id.fabDanger);
 
+        MapView map = (MapView) findViewById(R.id.map);
         map = (MapView) findViewById(R.id.map);
         final MapOverlay mapOverlay = new MapOverlay(this, getApplicationContext(), map);
 
+        fabDanger.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Assistance", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
 
+
+
+
+
+
+
+                NotificationCompat.Builder mBuilder =
+                        new NotificationCompat.Builder(getApplication())
+                                .setContentTitle("Un utilisateur a besoin d'assistance.")
+                                .setSmallIcon(R.drawable.alerte)
+                                .setContentText("A l'aide.");
+                Intent resultIntent = new Intent(getApplication(), LoginActivity.class);
+                TaskStackBuilder stackBuilder = TaskStackBuilder.create(getApplication());
+                stackBuilder.addParentStack(LoginActivity.class);
+                stackBuilder.addNextIntent(resultIntent);
+                PendingIntent resultPendingIntent =
+                        stackBuilder.getPendingIntent(
+                                0,
+                                PendingIntent.FLAG_UPDATE_CURRENT
+                        );
+                mBuilder.setContentIntent(resultPendingIntent);
+                NotificationManager mNotificationManager =
+                        (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                mNotificationManager.notify(1, mBuilder.build());
+            }
+        });
 
         FloatingActionButton fabAssistance = (FloatingActionButton) findViewById(R.id.fabAssistance);
         fabAssistance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Snackbar.make(view, "Danger", Snackbar.LENGTH_LONG)
                 Snackbar.make(view, "Pour signaler un danger, appuyez sur la carte.", 10000)
+
                         .setAction("Action", null).show();
                 mapOverlay.addEventReceiver();
                 final Handler handler = new Handler();
@@ -99,6 +136,8 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+
+        MapManager mapManager = new MapManager(this, getApplicationContext());
         View headerLayout = navigationView.getHeaderView(0);
 
         final TextView nickname_view = (TextView) headerLayout.findViewById(R.id.nickname_view);
@@ -224,14 +263,19 @@ public class MainActivity extends AppCompatActivity
             ft.beginTransaction().replace(R.id.hello,frag).commit();*/
         } else if (id == R.id.recherche){
             FragmentManager fm = getFragmentManager();
+            Recherche rechercheFragment = new Recherche();
+            rechercheFragment.show(fm,"Recherche");
             SearchTask searchTaskFragment = new SearchTask();
             searchTaskFragment.show(fm,"Recherche");
         }
+
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 
     public void setGetResult(JSONObject res){
         getResult = res;

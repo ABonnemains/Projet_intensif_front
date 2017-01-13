@@ -184,6 +184,7 @@ public class SignupActivity extends AppCompatActivity {
         String sir_name = _sir_name.getText().toString();
         String nickname = _nickname.getText().toString();
         String password = _password.getText().toString();
+        String birth_date = _birth_date.getText().toString();
         String confirmPassword = _confirm_password.getText().toString();
 
         long lTimestamp = 0;
@@ -206,6 +207,7 @@ public class SignupActivity extends AppCompatActivity {
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
+                        onSignupSuccess();
                         if(registerSuccessful){
                             onSignupSuccess();
                         }
@@ -214,6 +216,7 @@ public class SignupActivity extends AppCompatActivity {
                         }
                         progressDialog.dismiss();
                     }
+                }, 3000);
                 }, 10000);
 
     }
@@ -222,6 +225,8 @@ public class SignupActivity extends AppCompatActivity {
     public void onSignupSuccess() {
         _validate.setEnabled(true);
         setResult(RESULT_OK, null);
+        finish();
+
         Intent intent = new Intent(getBaseContext(),LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         getBaseContext().startActivity(intent);
@@ -242,6 +247,7 @@ public class SignupActivity extends AppCompatActivity {
         String confirm_password = _confirm_password.getText().toString();
         String birth_date = _birth_date.getText().toString();
         String phone = _phone.getText().toString();
+        boolean terms_and_conditions_accepted = _terms_and_conditions_checkbox.isChecked();
 
         //@TODO remettre la verification des conditions d'utilisations
         boolean terms_and_conditions_accepted = true;//_terms_and_conditions_checkbox.isChecked();
@@ -309,12 +315,14 @@ public class SignupActivity extends AppCompatActivity {
         }
 
         // add other checks
+        if (terms_and_conditions_accepted) {
         //@TODO remettre verification checkbox
         /*if (terms_and_conditions_accepted) {
             _terms_and_conditions_checkbox.setError("Champ obligatoire.");
             valid = false;
         } else {
             _terms_and_conditions_checkbox.setError(null);
+        }
         }*/
 
         return valid;

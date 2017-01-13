@@ -24,6 +24,7 @@ import org.osmdroid.views.overlay.Marker;
 import java.util.List;
 
 public class MapManager {
+    private Activity _activity;
     private MainActivity _activity;
     private Context _ctx;
     private Location _currentLocation;
@@ -31,6 +32,7 @@ public class MapManager {
     private MapView map;
     private Marker startMarker;
 
+    public MapManager(Activity activity, Context ctx) {
     public MapManager(MainActivity activity, Context ctx) {
         _activity = activity;
         _ctx = ctx;
@@ -38,9 +40,18 @@ public class MapManager {
         init();
     }
 
+    private void init()
+    {
     private void init() {
         Configuration.getInstance().load(_ctx, PreferenceManager.getDefaultSharedPreferences(_ctx));
 
+        MapView map = (MapView) _activity.findViewById(R.id.map);
+        map.setTileSource(TileSourceFactory.MAPNIK);
+        map.setMultiTouchControls(true);
+
+        Location currentLocation = getLocation();
+        if (currentLocation != null) {
+            _currentLocation = currentLocation;
         LocationManager locationManager = (LocationManager) _ctx.getSystemService(Context.LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(_ctx, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(_ctx, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
@@ -52,8 +63,57 @@ public class MapManager {
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
+        else {
+            currentLocation = new Location("default");
+            currentLocation.setLatitude(48.8583);
+            currentLocation.setLongitude(2.2944);
+        }
+        MapOverlay mapOverlay = new MapOverlay(_activity, _ctx, map);
+        mapOverlay.addOverlayPosition(new GeoPoint(currentLocation.getLatitude(), currentLocation.getLongitude()));
+        mapOverlay.addEventReceiver();
+        mapOverlay.removeEventReceiver();
+
+        IMapController mapController = map.getController();
+        mapController.setZoom(14);
+
+        GeoPoint startPoint = new GeoPoint(currentLocation.getLatitude(), currentLocation.getLongitude());
+        mapController.setCenter(startPoint);
+    }
+
+    private Location getLocation()
+    {
+        if(ContextCompat.checkSelfPermission( _ctx, android.Manifest.permission.ACCESS_FINE_LOCATION ) == PackageManager.PERMISSION_DENIED &&
+                ContextCompat.checkSelfPermission( _ctx, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_DENIED) {
+            return null;
+        }
+
+        LocationManager locationManager= (LocationManager) _ctx.getSystemService(Context.LOCATION_SERVICE);
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 1.0f, _activity);
         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 2000, 1.0f, _activity);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         List<String> providers = locationManager.getProviders(true);
         Location bestLocation = null;
 
@@ -70,6 +130,7 @@ public class MapManager {
         }
         _currentLocation = bestLocation;
 
+        return bestLocation;
         map = (MapView) _activity.findViewById(R.id.map);
         map.setTileSource(TileSourceFactory.MAPNIK);
         map.setMultiTouchControls(true);
