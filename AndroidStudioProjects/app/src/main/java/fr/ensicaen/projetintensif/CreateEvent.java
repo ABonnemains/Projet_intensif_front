@@ -77,7 +77,7 @@ public class CreateEvent extends DialogFragment {
                 EditText editTextDescription = (EditText) getView().findViewById(R.id.description);
                 String description = editTextDescription.getText().toString();
                 EditText editTextTime = (EditText) getView().findViewById(R.id.hour);
-                String hour = editTextDescription.getText().toString();
+                String hour = editTextTime.getText().toString();
 
                 String text = name + " " + place + " " + date + " " + description;
 
@@ -92,9 +92,10 @@ public class CreateEvent extends DialogFragment {
                 }
 
                 getEvents(name,place,date,description,hour);
-                String longitude = place.split(",")[0];
-                String latitude = place.split(",")[1];
-                mapOverlay.addMarker(new GeoPoint(Double.parseDouble(longitude),Double.parseDouble(latitude) ), description, R.drawable.obstacle, 0.04);
+                String latitude = place.split(",")[0];
+                String longitude = place.split(",")[1];
+                mapOverlay.addMarker(new GeoPoint(Double.parseDouble(latitude),Double.parseDouble(longitude)), name + "\n" + description + "\n" + date + " " + hour, R.drawable.picto_lieu_rouge_f, 0.03);
+                map.invalidate();
 
             }
         });
