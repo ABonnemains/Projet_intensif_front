@@ -8,9 +8,9 @@
         <item android:id="@+id/recherche"
             appNs:showAsAction="ifRoom"
             android:title="Rechercher" />
-        <item
+        <!--<item
             android:id="@+id/parametres"
-            android:title="Paramètres"/>
+            android:title="Paramètres"/>-->
 
     </group>
 <!--

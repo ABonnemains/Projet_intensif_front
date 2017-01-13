@@ -167,8 +167,8 @@ public class MainActivity extends AppCompatActivity
             ce.show(fm,"Créer un évènement");
 
 
-        } else if (id == R.id.parametres) {
-            /*Fragment frag = new BlankFragment();
+        /*} else if (id == R.id.parametres) {
+            Fragment frag = new BlankFragment();
             FragmentManager ft = getSupportFragmentManager();
             ft.beginTransaction().replace(R.id.hello,frag).commit();*/
         } else if (id == R.id.recherche){
