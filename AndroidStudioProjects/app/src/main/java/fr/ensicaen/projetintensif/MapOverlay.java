@@ -52,6 +52,7 @@ public class MapOverlay {
         return new BitmapDrawable(activity.getResources(), bitmap);
     }
 
+    /*
     public void addOverlayPosition(final IGeoPoint point){
         OverlayItem myLocationOverlayItem = new OverlayItem("Here", "Current Position", point);
 
@@ -75,6 +76,7 @@ public class MapOverlay {
                 }, context);
         mapView.getOverlays().add(currentLocationOverlay);
     }
+    */
 
     public void addMarker(final IGeoPoint point, final String description, int id, Double percent){
         Marker mPin = new Marker(mapView);
@@ -111,8 +113,8 @@ public class MapOverlay {
                         mPin.setTitle(description);
                         Drawable drawable = resizeImage(R.drawable.obstacle, 0.04);
                         mPin.setIcon(drawable);
-                        mapView.getOverlays().add(mPin);
                         mapView.invalidate();
+                        mapView.getOverlays().add(mPin);
                     }
                 });
 
