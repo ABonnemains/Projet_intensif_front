@@ -25,6 +25,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -131,6 +132,8 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View view) {
 
                 askAssistance(location.getLatitude(),location.getLongitude());
+                Toast toast = Toast.makeText(getApplicationContext(), "Une demande d'assistance a été lancée.", Toast.LENGTH_LONG);
+                toast.show();
 
                 /*Snackbar.make(view, "Assistance", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
