@@ -223,9 +223,9 @@ public class MainActivity extends AppCompatActivity
             FragmentManager ft = getSupportFragmentManager();
             ft.beginTransaction().replace(R.id.hello,frag).commit();*/
         } else if (id == R.id.recherche){
-            /*FragmentManager fm = getFragmentManager();
-            Recherche searchTaskFragment = new SearchTask();
-            searchTaskFragment.show(fm,"Recherche");*/
+            FragmentManager fm = getFragmentManager();
+            SearchTask searchTaskFragment = new SearchTask();
+            searchTaskFragment.show(fm,"Recherche");
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
