@@ -92,8 +92,8 @@ public class CreateEvent extends DialogFragment {
                 }
 
                 getEvents(name,place,date,description,hour);
-                String latitude = place.split(",")[0];
-                String longitude = place.split(",")[1];
+                String longitude  = place.split(",")[0];
+                String latitude= place.split(",")[1];
                 mapOverlay.addMarker(new GeoPoint(Double.parseDouble(latitude),Double.parseDouble(longitude)), name + "\n" + description + "\n" + date + " " + hour, R.drawable.picto_lieu_rouge_f, 0.03);
                 map.invalidate();
 
