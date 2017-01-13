@@ -82,22 +82,22 @@ Fonctionalités Prioritaires
 - [x] S'enregistrer
 - [x] Se connecter
 - [x] Créer un trajet
-- [x] Partager un trajet
-- [x] Rechercher un trajet
 - [x] Créer une demande d'assistance
 - [x] Signaler un obstacle / une dificulté sur le trajet
 - [x] Paramétrer son profil
 
 Fonctionalités Secondaires
 - [x] Créer un évènement
-- [ ] S'inscrire à un évènement
+- [ ] Partager un trajet (back-end OK)
+- [ ] Rechercher un trajet (back-end OK)
+- [ ] S'inscrire à un évènement (back-end OK)
 - [ ] Enregistrer un trajet effectué
-- [ ] Notation des trajets
-- [ ] Notation accessibilité (PMR)
-- [ ] Recherche d'utilisateur
-- [ ] Notation utilisateur
-- [ ] Notation obstacle
-- [ ] Système de classement
+- [ ] Notation des trajets (back-end OK)
+- [ ] Notation accessibilité (PMR) (back-end OK)
+- [ ] Recherche d'utilisateur (back-end OK)
+- [ ] Notation utilisateur (back-end OK)
+- [ ] Notation obstacle (back-end OK)
+- [ ] Système de classement (back-end OK)
 - [ ] Dépenser les points reçu (promotion)
 
 ## Mockup
