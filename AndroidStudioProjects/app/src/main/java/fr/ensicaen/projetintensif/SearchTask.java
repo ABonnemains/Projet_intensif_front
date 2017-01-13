@@ -8,16 +8,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
-import org.osmdroid.util.GeoPoint;
-
-import java.util.ArrayList;
-
 
 public class SearchTask extends DialogFragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_recherche, container, false);
+        return inflater.inflate(R.layout.fragment_search, container, false);
     }
 
     @Override
